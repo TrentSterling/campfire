@@ -38,9 +38,12 @@ function idleNpcs(pred) {
 }
 
 const VIGNETTES = [
-  // 1) social gaze: two idle NPCs near each other occasionally look at one another
+  // 1) social gaze: two idle NPCs near each other occasionally look at one another.
+  // Kept short + rare (long cooldown, low weight): gaze parks wander() entirely
+  // (Critter.wander() no-ops while c.vignette is set) so it must read as a quick
+  // eye-contact beat, not the default idle state.
   {
-    name: 'gaze', min: 2, cd: 6, weight: 1.2,
+    name: 'gaze', min: 2, cd: 12, weight: 0.6,
     find() {
       const p = idleNpcs(c => !c.gazeAt)
       for (let i = 0; i < p.length; i++) {
@@ -50,7 +53,7 @@ const VIGNETTES = [
       }
       return null
     },
-    start(v) { v.dur = rr(2.5, 5) },
+    start(v) { v.dur = rr(1.5, 2.8) },
     tick(v, dt) {
       v.t = (v.t || 0) + dt
       const [a, b] = v.cast
@@ -62,9 +65,11 @@ const VIGNETTES = [
     },
   },
 
-  // 2) nap pile: 2-3 idle NPCs near the fire get the same cluster point, settle, then release
+  // 2) nap pile: 2-3 idle NPCs near the fire get the same cluster point, settle, then release.
+  // Long cooldown + low weight: this is the one vignette that goes fully still
+  // (napping), so it needs to stay a rare flourish, not the resting state.
   {
-    name: 'nap', min: 2, cd: 15, weight: 1.0,
+    name: 'nap', min: 2, cd: 22, weight: 0.5,
     find() {
       const near = idleNpcs(c => Math.hypot(c.pos.x, c.pos.z) < FIRE_R + 6)
       return near.length >= 2 ? near.slice(0, 3) : null
@@ -75,7 +80,7 @@ const VIGNETTES = [
       cx /= v.cast.length; cz /= v.cast.length
       const d = Math.hypot(cx, cz)
       if (d < FIRE_R + 1.2) { const s = (FIRE_R + 1.2) / (d || 1); cx *= s; cz *= s }
-      v.dur = rr(6, 11)
+      v.dur = rr(4, 7)
       v.cast.forEach((c, i) => {
         const a = (i / v.cast.length) * TAU
         try { c.target = { x: cx + Math.sin(a) * 0.35, z: cz + Math.cos(a) * 0.35 } } catch (e) {}
@@ -91,9 +96,13 @@ const VIGNETTES = [
     end(v) { for (const c of v.cast) { try { c.napping = false } catch (e) {} } },
   },
 
-  // 3) tag: one idle NPC's target briefly becomes another's live position (a little chase)
+  // 3) tag: one idle NPC's target briefly becomes another's live position (a little chase).
+  // Both sides move (the "it" chases, the other juke-flees every ~1s) so this
+  // is the vignette that reads as the most motion -- kept frequent/high weight.
+  // Bug fixed: originally only `a` (the chaser) ever got a target, so `b` stood
+  // frozen the whole vignette (wander() no-ops while c.vignette is set).
   {
-    name: 'tag', min: 2, cd: 10, weight: 0.8,
+    name: 'tag', min: 2, cd: 8, weight: 1.0,
     find() {
       const p = idleNpcs(c => true)
       for (let i = 0; i < p.length; i++) {
@@ -103,11 +112,23 @@ const VIGNETTES = [
       }
       return null
     },
-    start(v) { v.dur = rr(4, 7) },
+    start(v) { v.dur = rr(3, 5.5); v.fleeT = 0 },
     tick(v, dt) {
       v.t = (v.t || 0) + dt
       const [a, b] = v.cast
-      try { a.target = { x: b.pos.x, z: b.pos.z } } catch (e) {}
+      try {
+        a.target = { x: b.pos.x, z: b.pos.z }
+        v.fleeT -= dt
+        if (v.fleeT <= 0) {
+          v.fleeT = rr(0.8, 1.4)
+          const ang = Math.atan2(b.pos.x - a.pos.x, b.pos.z - a.pos.z) + rr(-0.6, 0.6)
+          const r = rr(1.5, 3)
+          let tx = b.pos.x + Math.sin(ang) * r, tz = b.pos.z + Math.cos(ang) * r
+          const dd = Math.hypot(tx, tz)
+          if (dd > 10) { tx *= 10 / dd; tz *= 10 / dd } // same island-ish leash wander() uses
+          b.target = { x: tx, z: tz }
+        }
+      } catch (e) {}
       return v.t >= v.dur
     },
   },
@@ -121,7 +142,16 @@ export function tickDirector(dt) {
     director.clock += dt
     for (let i = director.active.length - 1; i >= 0; i--) {
       const v = director.active[i]
-      v.cast = v.cast.filter(c => c && critters.includes(c) && c.wanderEnabled && !c.controlled)
+      const before = v.cast
+      v.cast = before.filter(c => c && critters.includes(c) && c.wanderEnabled && !c.controlled)
+      // bug fix: a member dropped by the filter above (e.g. despawned mid-vignette)
+      // used to keep its `vignette` claim forever since the cleanup below only
+      // ever walked the post-filter cast -- clear it here so no critter can be
+      // left permanently claimed (stuck refusing to wander) if this ever fires
+      // on a still-live critter in the future.
+      if (v.cast.length !== before.length) {
+        for (const c of before) if (c && !v.cast.includes(c)) { try { c.vignette = null } catch (e) {} }
+      }
       const done = v.cast.length < v.row.min || v.row.tick(v, dt)
       if (done) {
         if (v.cast.length && v.row.end) { try { v.row.end(v) } catch (e) {} }

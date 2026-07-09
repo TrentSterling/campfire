@@ -44,12 +44,12 @@ export class Critter {
     this.lookDir = new THREE.Vector3(Math.sin(heading), 0, Math.cos(heading))
     this.lookTimer = rr(1, 4)
     this.gazeAt = null; this.gazeT = 0
-    this.wanderTimer = rr(2, 7)
+    this.wanderTimer = rr(1, 2.5)      // fast first move so a fresh spawn doesn't sit idle
     this.time = Math.random() * 100
     this.gaitPhase = Math.random()
     this.squash = 1; this.squashVel = 0
     this.dip = 0; this.dipVel = 0
-    this.idleBumpTimer = rr(4, 9)     // rare idle settle/bounce blip
+    this.idleBumpTimer = rr(2.5, 5)   // rare idle settle/bounce blip
     this.airY = 0
     this.speedN = 0
     this.pitch = 0; this.roll = 0
@@ -61,7 +61,7 @@ export class Critter {
     this.saccadeX = 0; this.saccadeY = 0
     this.spawnT = 0                   // spawn pop
     this.puffK = 1                    // whole-body inflate (springs back to 1)
-    this.quirkTimer = rr(4, 9)        // idle fidget
+    this.quirkTimer = rr(2.5, 5)      // idle fidget
     // hopper state
     this.hState = 'idle'; this.hT = rr(0, 1); this.hVel = new THREE.Vector3()
     this.dashAir = false
@@ -470,14 +470,17 @@ export class Critter {
     // rare idle settle/bounce blip so idle critters visibly breathe + bounce
     this.idleBumpTimer -= dt
     if (this.idleBumpTimer <= 0) {
-      this.idleBumpTimer = rr(4, 9)
+      this.idleBumpTimer = rr(2.5, 5)
       if (this.speedN < 0.15) this.squashVel -= 0.4
     }
     this.puffK += (1 - this.puffK) * Math.min(1, 8 * dt)
     this.quirkTimer -= dt
     if (this.quirkTimer <= 0) {
-      this.quirkTimer = rr(4, 9)
-      if (!this.napping && !this.controlled && !this.vignette && this.speedN < 0.12) this.quirk()
+      this.quirkTimer = rr(2.5, 5)
+      // napping should read fully asleep, but a gaze/tag hold shouldn't freeze
+      // the critter solid -- let idle fidgets (foot shuffle/tail flick/shiver)
+      // keep playing through those so paired critters don't look like statues
+      if (!this.napping && !this.controlled && this.vignette !== 'nap' && this.speedN < 0.12) this.quirk()
     }
     if (this.arch === 'hopper') this.updateHopper(dt)
     else if (this.arch === 'flyer') this.updateFlyer(dt)
@@ -554,8 +557,8 @@ export class Critter {
     }
     this.wanderTimer -= dt
     if (this.wanderTimer <= 0 && !this.target) {
-      this.wanderTimer = rr(3.5, 9)
-      if (Math.random() < 0.5) {
+      this.wanderTimer = rr(2, 4.5)
+      if (Math.random() < 0.72) {
         const a = Math.random() * TAU, r = rr(1.5, 4)
         let tx = this.pos.x + Math.sin(a) * r, tz = this.pos.z + Math.cos(a) * r
         if (Math.random() < 0.45) { // gather: drift toward a seat ringing the firepit
@@ -931,7 +934,7 @@ export class Critter {
       this.quat.setFromEuler(E1)
       this.yawQuat.copy(this.quat)
     }
-    const breath = 1 + Math.sin(this.time * 2.4) * 0.018
+    const breath = 1 + Math.sin(this.time * 2.4) * 0.035
     const pop = 0.6 + 0.4 * (1 - Math.pow(1 - this.spawnT, 3)) // spawn scale-in
     const rB = breath * pop * (this.puffK || 1)
 
@@ -939,7 +942,9 @@ export class Critter {
     if (this.chain) {
       // serpent: sway each resampled chain point sideways with the slither phase
       const n = this.chain.length - 1
-      const amp = 0.13 * S * (0.25 + this.speedN * 0.75)
+      // idle floor raised (0.25 -> 0.5) so a stationary serpent still visibly
+      // coils/wags instead of reading as a static rope; top speed unaffected
+      const amp = 0.13 * S * Math.max(0.5, 0.25 + this.speedN * 0.75)
       for (let s = 0; s <= n; s++) {
         const c = this.chain[s]
         const q = this.chain[Math.min(s + 1, n)], p = this.chain[Math.max(s - 1, 0)]
@@ -1118,7 +1123,7 @@ export class Critter {
     const yawMax = 0.55
     let wantYawRaw = angleDiff(Math.atan2(this.lookDir.x, this.lookDir.z), this.heading)
     // gentle idle head sway so heads never look locked
-    if (!this.target && !this.gazeAt && !this.controlled) wantYawRaw += Math.sin(this.time * 0.5 + this.id) * 0.08
+    if (!this.target && !this.gazeAt && !this.controlled) wantYawRaw += Math.sin(this.time * 0.65 + this.id) * 0.12
     const wantYaw = clamp(wantYawRaw, -yawMax, yawMax)
     this.headYaw = lerp(this.headYaw, wantYaw, Math.min(1, 6 * dt))
     this.headPitch = lerp(this.headPitch, clamp(-this.lookDir.y * 0.8, -0.3, 0.25), Math.min(1, 5 * dt))
