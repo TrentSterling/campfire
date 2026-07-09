@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Campfire</title>
+<style>
+  :root { color-scheme: dark; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; overflow: hidden; background: #17122a; }
+  #app { position: fixed; inset: 0; }
+  canvas { display: block; }
+
+  .hud {
+    position: fixed; left: 16px; top: 14px; z-index: 10;
+    font: 500 14px/1.4 ui-rounded, "Segoe UI", system-ui, sans-serif;
+    color: #ffe9c7; text-shadow: 0 1px 3px rgba(0,0,0,.6);
+    pointer-events: none; user-select: none;
+  }
+  .hud h1 { font-size: 20px; letter-spacing: .5px; color: #ffd39b; }
+  .hud .status { margin-top: 3px; opacity: .9; }
+  .hud .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+    background: #c9a227; margin-right: 6px; vertical-align: middle; }
+  .hud .dot.on { background: #6ee7a0; box-shadow: 0 0 8px #6ee7a0; }
+
+  .hint {
+    position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 10;
+    font: 500 13px/1.4 ui-rounded, "Segoe UI", system-ui, sans-serif;
+    color: #ffe9c7cc; text-shadow: 0 1px 3px rgba(0,0,0,.6);
+    pointer-events: none; user-select: none; text-align: center;
+  }
+  .badge {
+    position: fixed; right: 14px; top: 14px; z-index: 10;
+    font: 600 12px/1 ui-rounded, "Segoe UI", system-ui, sans-serif;
+    color: #3a2a1c; background: #ffd39b; padding: 6px 10px; border-radius: 999px;
+    pointer-events: none; user-select: none; opacity: .9;
+  }
+  #chatlog {
+    position: fixed; left: 16px; bottom: 84px; z-index: 10; max-width: 42vw;
+    font: 500 13px/1.55 "Segoe UI", system-ui, sans-serif; color: #ffe9c7;
+    text-shadow: 0 1px 3px rgba(0,0,0,.75); pointer-events: none; user-select: none;
+  }
+  #chatlog b { color: #ffd39b; }
+  #chatinput {
+    position: fixed; left: 50%; bottom: 46px; transform: translateX(-50%); z-index: 11;
+    width: min(360px, 72vw); padding: 8px 14px; border-radius: 999px;
+    border: 1px solid #ffffff2e; background: rgba(40,30,56,0.55); color: #ffe9c7;
+    font: 500 14px "Segoe UI", system-ui, sans-serif; outline: none; backdrop-filter: blur(4px);
+  }
+  #chatinput::placeholder { color: #ffe9c799; }
+  #chatinput:focus { border-color: #ffd39b88; }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="hud">
+  <h1>Campfire</h1>
+  <div class="status"><span class="dot" id="dot"></span><span id="status">lighting the fire...</span></div>
+</div>
+<div class="badge" id="room">room: main</div>
+<div class="hint">WASD or arrows to walk &nbsp;·&nbsp; drag to look around</div>
+<div id="chatlog"></div>
+<input id="chatinput" maxlength="120" placeholder="press Enter to chat" autocomplete="off" spellcheck="false" />
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://esm.run/three@0.160.0",
+    "trystero": "https://esm.run/trystero"
+  }
+}
+</script>
+
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
