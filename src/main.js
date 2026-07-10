@@ -24,7 +24,7 @@ import { tickDirector } from './critter/director.js'                            
 // name) is persisted across reloads (Lane A) so a returning player keeps the same
 // critter recipe/palette and display name instead of rerolling every visit.
 // ---------------------------------------------------------------------------
-const { seed, name } = getOrCreateIdentity()
+const { seed, name } = await getOrCreateIdentity()
 state.mySeed = seed
 state.myName = name
 const me = state.me = critterMake(state.mySeed, (Math.random() - 0.5) * 8, 6 + Math.random() * 3, Math.PI)
