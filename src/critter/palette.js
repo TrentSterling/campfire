@@ -3,10 +3,8 @@
 import * as THREE from 'three'
 import { pick, rand } from '../engine/rng.js'
 
-// Campfire night grade washes pastels toward gray, so creature saturation gets a
-// ~1.6x boost here (deterministic: same multiplier on every client) to keep the
-// toys popping red/purple/blue/pink against the dusky meadow at gameplay distance.
-const NIGHT_SAT = 1.6
+// Keep the seeded palette readable at dusk without neon clipping in firelight.
+const NIGHT_SAT = 1.1
 function hsl(h, s, l) { const c = new THREE.Color(); c.setHSL((((h % 360) + 360) % 360) / 360, Math.min(1, s * NIGHT_SAT), l); return [c.r, c.g, c.b] }
 
 export function genPalette(hue, family) {

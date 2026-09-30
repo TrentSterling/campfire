@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "findings": [],
+  "collision": {
+    "closest": 0.45600121456995113,
+    "air": 0
+  },
+  "solids": {
+    "count": 53,
+    "minMargin": 0.0006818651492271899,
+    "failed": []
+  },
+  "layout": {
+    "nameWidth": 140,
+    "noNameOverlap": true,
+    "unobstructedHeight": 310.5,
+    "height": 740
+  },
+  "errors": []
+}

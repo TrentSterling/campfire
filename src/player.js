@@ -5,15 +5,16 @@
 import * as THREE from 'three'
 import { renderer, camera, GY } from './world/scene.js'
 import { state, peers } from './state.js'
+import { localCritters } from './coop.js'
 
 const keys = {}
-const typing = () => document.activeElement && document.activeElement.tagName === 'INPUT'
+const typing = () => /INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName || '')
 addEventListener('keydown', e => { if (typing()) return; keys[e.key.toLowerCase()] = true })
 addEventListener('keyup', e => { keys[e.key.toLowerCase()] = false })
 
 // mouse-drag orbit. Default pitch sits ~17 degrees above horizon (OG's near-
 // horizontal framing) so silhouettes and faces read instead of splayed top-downs.
-let camYaw = 0, camPitch = 0.30, dragging = false, lastX = 0, lastY = 0
+let camYaw = 0.08, camPitch = 0.48, dragging = false, lastX = 0, lastY = 0
 renderer.domElement.addEventListener('pointerdown', e => { dragging = true; lastX = e.clientX; lastY = e.clientY })
 addEventListener('pointerup', () => dragging = false)
 addEventListener('pointermove', e => {
@@ -26,20 +27,39 @@ addEventListener('pointermove', e => {
 // camera distance: OG framing (~8.8) by default, wheel-zoomable 6..18 so players
 // can frame wide shots of the whole fire or push in close on faces
 const ZOOM_MIN = 6, ZOOM_MAX = 18
-let camDist = 8.8
+let camDist = 12.5
 export function setZoom(d) { d = +d; if (isFinite(d)) camDist = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, d)); return camDist }
 export function getZoom() { return camDist }
-addEventListener('wheel', e => { camDist = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, camDist + e.deltaY * 0.01)) }, { passive: true })
+renderer.domElement.addEventListener('wheel', e => { camDist = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, camDist + e.deltaY * 0.01)) }, { passive: true })
+addEventListener('blur', () => { for (const key of Object.keys(keys)) keys[key] = false; dragging = false })
+document.addEventListener('focusin', () => { if (typing()) for (const key of Object.keys(keys)) keys[key] = false })
 
 const camTarget = new THREE.Vector3()
 export function updateCamera(dt) {
+  // couch co-op: frame the whole local group (centroid + zoom out to fit the
+  // spread); solo this degenerates to exactly the old me-follow camera
+  const locals = localCritters()
   const me = state.me
-  const ox = Math.sin(camYaw) * Math.cos(camPitch) * camDist
-  const oy = Math.sin(camPitch) * camDist + 1.6
-  const oz = Math.cos(camYaw) * Math.cos(camPitch) * camDist
-  camTarget.set(me.pos.x + ox, GY + oy, me.pos.z + oz)
+  const nearFire = Math.max(0, 1 - Math.hypot(me.pos.x, me.pos.z) / 15)
+  // Close zoom follows the player; centering the fire at six units pushed the
+  // foreground avatar below the viewport and behind chat.
+  const fireFocus=nearFire*.8*Math.min(1,Math.max(0,(camDist-6)/6.5))
+  let cx = me.pos.x * (1 - fireFocus), cz = me.pos.z * (1 - fireFocus), dist = camDist
+  if (innerWidth < 640) dist *= 1.18
+  if (locals.length > 1) {
+    cx = 0; cz = 0
+    for (const c of locals) { cx += c.pos.x; cz += c.pos.z }
+    cx /= locals.length; cz /= locals.length
+    let spread = 0
+    for (const c of locals) spread = Math.max(spread, Math.hypot(c.pos.x - cx, c.pos.z - cz))
+    dist = Math.max(camDist, Math.min(26, spread * 2.1 + 7))
+  }
+  const ox = Math.sin(camYaw) * Math.cos(camPitch) * dist
+  const oy = Math.sin(camPitch) * dist + 1.6
+  const oz = Math.cos(camYaw) * Math.cos(camPitch) * dist
+  camTarget.set(cx + ox, GY + oy, cz + oz)
   camera.position.lerp(camTarget, 1 - Math.pow(0.001, dt))
-  camera.lookAt(me.pos.x, GY + 1.1, me.pos.z)
+  camera.lookAt(cx, GY + 1.1, cz)
 }
 
 const fwd = new THREE.Vector3(), right = new THREE.Vector3(), up = new THREE.Vector3(0, 1, 0), move = new THREE.Vector3()

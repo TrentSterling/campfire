@@ -3,20 +3,33 @@
 // contract (window.__frames, window.__peers) that the verify harness reads;
 // window.campfire itself is installed by ./net/api.js. No domain logic here.
 import * as THREE from 'three'
-import { renderer, scene, camera, updateWorld } from './world/scene.js'
+import { renderer, scene, camera, updateWorld, resizeView } from './world/scene.js'
 import './world/scatter.js'                        // side effect: seeded meadow scatter + ambient life (Lane B)
+import './world/campsite.js'
+import { updateShore } from './world/shore.js'
 import { critterMake } from './critter/critter.js'
 import { makeTag, placeSprites } from './critter/tags.js'
 import { state, peers, npcs } from './state.js'
 import { angleLerp } from './engine/rng.js'
 import { updateMovement, updateCamera } from './player.js'
 import { connect, startNPCs } from './net/net.js'
+import { storeValues } from './net/replication.js'  // unified remote-entity loop (players + NPCs)
 import { updateMoves, onPeerAct } from './moves.js' // gamepad + jump/pet/wave moves
-import { onChat } from './net/api.js'              // side effect: chat UI + window.campfire
+import { onChat, doSay } from './net/api.js'       // side effect: chat UI + window.campfire
+import { initFishing, updateFishing } from './fishing.js'  // v1.3: shoreline fishing
+import { updateCoop } from './coop.js'                     // v1.3: couch co-op pads
+import { initProgress, myTitle, ownHat } from './progress.js'  // v1.4: shells/warmth/journal/shop
 import { getOrCreateIdentity, saveIdentity, initIdentityUI } from './identity.js' // Lane A: persistent identity
+import { setHat, placeGear } from './critter/gear.js'  // v1.3: hats + skateboards (side effect: hat rack landmark)
 import { isTouchDevice, initTouchControls, update as updateTouch } from './touch.js' // Lane B: mobile joystick + buttons
 import { initAudio, update as updateAudio } from './audio.js'                        // Lane C: fire crackle + chirps + dust
 import { tickDirector } from './critter/director.js'                                 // Lane D: idle NPC social vignettes
+import { initUI, refreshHint } from './ui.js'
+import { initVoice, updateVoice } from './net/voice.js'
+import { initActivities, updateActivities } from './activities.js'
+import { initGPUText, renderGPUText } from './gpu-ui.js'
+import { initSettings } from './settings.js'
+import { initHatShop, updateHatShop } from './hat-shop.js'
 
 // ---------------------------------------------------------------------------
 // Local player: a controlled critter (WASD writes critter.input, camera-relative;
@@ -24,26 +37,32 @@ import { tickDirector } from './critter/director.js'                            
 // name) is persisted across reloads (Lane A) so a returning player keeps the same
 // critter recipe/palette and display name instead of rerolling every visit.
 // ---------------------------------------------------------------------------
-const { seed, name } = await getOrCreateIdentity()
+const { seed, name, hat } = await getOrCreateIdentity()
 state.mySeed = seed
 state.myName = name
 const me = state.me = critterMake(state.mySeed, (Math.random() - 0.5) * 8, 6 + Math.random() * 3, Math.PI)
+setHat(me, hat)   // persisted hat back on (rides the move heartbeat to peers)
 me.tag = makeTag(state.myName)
+initProgress()
+ownHat(hat)       // pre-shop hats are grandfathered into the owned list
+me.tag.userData.draw(state.myName, myTitle())   // warmth title line under the name
 me.tag.userData.own = true          // your own tag renders dimmed (you know who you are)
 me.group.add(me.tag)
-// touch users get joystick/button instructions instead of WASD/Space/E/Q (which
-// don't apply on a phone); net/api.js's setMyName mirrors this same ternary so a
-// rename doesn't revert the hint to desktop-only copy.
-document.querySelector('.hint').innerHTML = 'you are <b style="color:#ffd39b">' + state.myName + '</b> &nbsp;·&nbsp; ' +
-  (isTouchDevice ? 'joystick to walk · buttons to hop/pet/wave · drag to look' : 'WASD walk · Space hop · E pet · Q wave · drag to look · gamepad works')
+refreshHint()
 
-// bottom-right "click to rename" affordance; persists the rename back to localStorage
+// Rename affordance; persists the rename back to localStorage.
 initIdentityUI(() => state.myName, newName => {
   window.campfire.setName(newName)
-  saveIdentity(state.mySeed, newName)
+  saveIdentity(state.mySeed, newName, me.hatId ?? -1)
 })
 
 initAudio() // suspended AudioContext; self-unlocks on first pointerdown/keydown
+document.body.dataset.touch = String(isTouchDevice)
+initUI()
+initVoice()
+initActivities()
+initSettings()
+initHatShop()
 
 // touch/mobile: virtual joystick (bottom-left) + hop/pet/wave buttons (bottom-right).
 // No-op (zero DOM) on non-touch devices. onMove mirrors moves.js's gamepad stick math.
@@ -61,18 +80,14 @@ initTouchControls({
   onPet: () => window.campfire.pet(),
   onWave: () => window.campfire.wave(),
 })
-// avoid the identity tag/input overlapping the touch button column, and the
-// bottom-center hint text overlapping the joystick (bottom-left, 108px tall), on phones
-if (isTouchDevice) {
-  const idTag = document.getElementById('identity-tag'), idInput = document.getElementById('identity-input')
-  if (idTag) idTag.style.bottom = '236px'
-  if (idInput) idInput.style.bottom = '236px'
-  const hintEl = document.querySelector('.hint')
-  if (hintEl) hintEl.style.bottom = '145px'
-}
-
 connect({ onChat, onAct: onPeerAct })   // resilient: solo mode if the relays are unreachable
 startNPCs()
+initFishing({ say: doSay })   // injected to avoid an api.js <-> fishing.js cycle
+try { await initGPUText() }
+catch (error) {
+  window.__gpuText={backend:'unavailable',mode:'native-accessibility-fallback',message:error.message}
+  console.warn('Campfire WebGPU text unavailable:',error.message)
+}
 
 // ---------------------------------------------------------------------------
 // Loop
@@ -88,34 +103,42 @@ function frame() {
   updateMovement(dt)
   updateMoves(dt)   // gamepad stick/buttons layer over the keyboard input
   updateTouch(dt)   // touch joystick layer (mobile), same "last write wins" slot
+  updateCoop(dt)    // extra pads join/drive couch guests (before the store loop updates them)
   tickDirector(dt)  // idle NPC social vignettes (gaze/nap/tag) claim wanderEnabled critters
   me.update(dt)
   updateCamera(dt)
   placeSprites(me)
+  placeGear(me, dt)
 
-  // remote critters walk to their broadcast targets with their own gait; when
-  // idle, settle their heading toward the broadcast one
-  for (const p of peers.values()) {
-    const c = p.critter
-    if (!c.target && c.speedN < 0.08 && (c.arch !== 'hopper' || c.hState === 'idle'))
-      c.heading = angleLerp(c.heading, p.heading, 1 - Math.pow(0.02, dt))
+  // remote players walk to their broadcast targets with their own gait, settling
+  // their heading toward the broadcast one when idle; NPCs wander via the OG AI
+  // when owned (Critter.update) or walk to a broadcast target when remote --
+  // one loop over the replication store drives every non-local critter exactly
+  // once per frame (see src/net/replication.js)
+  for (const rec of storeValues()) {
+    const c = rec.critter
+    if (c === me) continue
+    if (rec.kind === 'player' && !c.target && c.speedN < 0.08 && (c.arch !== 'hopper' || c.hState === 'idle'))
+      c.heading = angleLerp(c.heading, rec.heading, 1 - Math.pow(0.02, dt))
     c.update(dt)
     placeSprites(c)
+    placeGear(c, dt)
   }
 
-  // NPC companions wander via the OG AI (inside Critter.update)
-  for (const c of npcs) { c.update(dt); placeSprites(c) }
+  updateFishing(dt)  // local cast machine + rod/bobber/held-fish for every fisher
+  updateActivities()
+  updateHatShop()
 
   // fire flicker + sparks + fireflies
   updateWorld(t, dt)
+  updateShore(t)
   updateAudio(dt)   // dust pool: rise/fade/dispose (audio itself is event-driven, no per-frame work)
+  updateVoice(dt)
 
   renderer.render(scene, camera)
+  renderGPUText(dt)
   requestAnimationFrame(frame)
 }
 frame()
 
-addEventListener('resize', () => {
-  camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix()
-  renderer.setSize(innerWidth, innerHeight)
-})
+addEventListener('resize', resizeView)

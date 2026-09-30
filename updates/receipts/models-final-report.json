@@ -1,0 +1,2079 @@
+{
+  "catalog": [
+    {
+      "id": "quadruped-1337",
+      "label": "quadruped / 1337",
+      "category": "critters"
+    },
+    {
+      "id": "quadruped-2069",
+      "label": "quadruped / 2069",
+      "category": "critters"
+    },
+    {
+      "id": "quadruped-8675309",
+      "label": "quadruped / 8675309",
+      "category": "critters"
+    },
+    {
+      "id": "biped-1337",
+      "label": "biped / 1337",
+      "category": "critters"
+    },
+    {
+      "id": "biped-2069",
+      "label": "biped / 2069",
+      "category": "critters"
+    },
+    {
+      "id": "biped-8675309",
+      "label": "biped / 8675309",
+      "category": "critters"
+    },
+    {
+      "id": "hopper-1337",
+      "label": "hopper / 1337",
+      "category": "critters"
+    },
+    {
+      "id": "hopper-2069",
+      "label": "hopper / 2069",
+      "category": "critters"
+    },
+    {
+      "id": "hopper-8675309",
+      "label": "hopper / 8675309",
+      "category": "critters"
+    },
+    {
+      "id": "multiped-1337",
+      "label": "multiped / 1337",
+      "category": "critters"
+    },
+    {
+      "id": "multiped-2069",
+      "label": "multiped / 2069",
+      "category": "critters"
+    },
+    {
+      "id": "multiped-8675309",
+      "label": "multiped / 8675309",
+      "category": "critters"
+    },
+    {
+      "id": "serpent-1337",
+      "label": "serpent / 1337",
+      "category": "critters"
+    },
+    {
+      "id": "serpent-2069",
+      "label": "serpent / 2069",
+      "category": "critters"
+    },
+    {
+      "id": "serpent-8675309",
+      "label": "serpent / 8675309",
+      "category": "critters"
+    },
+    {
+      "id": "flyer-1337",
+      "label": "flyer / 1337",
+      "category": "critters"
+    },
+    {
+      "id": "flyer-2069",
+      "label": "flyer / 2069",
+      "category": "critters"
+    },
+    {
+      "id": "flyer-8675309",
+      "label": "flyer / 8675309",
+      "category": "critters"
+    },
+    {
+      "id": "hat-0",
+      "label": "party cone",
+      "category": "hats"
+    },
+    {
+      "id": "hat-1",
+      "label": "top hat",
+      "category": "hats"
+    },
+    {
+      "id": "hat-2",
+      "label": "wizard hat",
+      "category": "hats"
+    },
+    {
+      "id": "hat-3",
+      "label": "crown",
+      "category": "hats"
+    },
+    {
+      "id": "hat-4",
+      "label": "toadstool",
+      "category": "hats"
+    },
+    {
+      "id": "hat-5",
+      "label": "daisy",
+      "category": "hats"
+    },
+    {
+      "id": "hat-6",
+      "label": "halo",
+      "category": "hats"
+    },
+    {
+      "id": "hat-7",
+      "label": "propeller beanie",
+      "category": "hats"
+    },
+    {
+      "id": "skateboard",
+      "label": "skateboard",
+      "category": "equipment"
+    },
+    {
+      "id": "rod",
+      "label": "fishing rod",
+      "category": "equipment"
+    },
+    {
+      "id": "bobber",
+      "label": "bobber",
+      "category": "equipment"
+    },
+    {
+      "id": "fish-Snapper",
+      "label": "Mossy Snapper",
+      "category": "fish"
+    },
+    {
+      "id": "fish-Wisp",
+      "label": "Mossy Wisp",
+      "category": "fish"
+    },
+    {
+      "id": "fish-Carp",
+      "label": "Mossy Carp",
+      "category": "fish"
+    },
+    {
+      "id": "fish-Puffer",
+      "label": "Mossy Puffer",
+      "category": "fish"
+    },
+    {
+      "id": "fish-Sardine",
+      "label": "Mossy Sardine",
+      "category": "fish"
+    },
+    {
+      "id": "fish-Koi",
+      "label": "Mossy Koi",
+      "category": "fish"
+    },
+    {
+      "id": "fish-Dab",
+      "label": "Mossy Dab",
+      "category": "fish"
+    },
+    {
+      "id": "fish-Chub",
+      "label": "Mossy Chub",
+      "category": "fish"
+    },
+    {
+      "id": "fish-Minnow",
+      "label": "Mossy Minnow",
+      "category": "fish"
+    },
+    {
+      "id": "fish-Gulper",
+      "label": "Mossy Gulper",
+      "category": "fish"
+    },
+    {
+      "id": "fish-Bloop",
+      "label": "Mossy Bloop",
+      "category": "fish"
+    },
+    {
+      "id": "fish-Guppy",
+      "label": "Mossy Guppy",
+      "category": "fish"
+    },
+    {
+      "id": "fish-gold",
+      "label": "golden fish",
+      "category": "fish"
+    },
+    {
+      "id": "fir",
+      "label": "fir tree",
+      "category": "world"
+    },
+    {
+      "id": "broadleaf",
+      "label": "broadleaf tree",
+      "category": "world"
+    },
+    {
+      "id": "bench",
+      "label": "log bench",
+      "category": "world"
+    },
+    {
+      "id": "lantern",
+      "label": "lantern",
+      "category": "world"
+    },
+    {
+      "id": "festoon",
+      "label": "festoon lights",
+      "category": "world"
+    },
+    {
+      "id": "rack",
+      "label": "hat rack",
+      "category": "world"
+    },
+    {
+      "id": "dock",
+      "label": "fishing dock",
+      "category": "world"
+    },
+    {
+      "id": "reeds",
+      "label": "shore reeds",
+      "category": "world"
+    },
+    {
+      "id": "fire",
+      "label": "fire, stones and logs",
+      "category": "world"
+    },
+    {
+      "id": "boulder",
+      "label": "boulder",
+      "category": "flora"
+    },
+    {
+      "id": "grass",
+      "label": "grass",
+      "category": "flora"
+    },
+    {
+      "id": "flower",
+      "label": "flower",
+      "category": "flora"
+    },
+    {
+      "id": "mushroom",
+      "label": "mushroom",
+      "category": "flora"
+    },
+    {
+      "id": "pebble",
+      "label": "pebble",
+      "category": "flora"
+    },
+    {
+      "id": "stump",
+      "label": "stump",
+      "category": "flora"
+    },
+    {
+      "id": "bush",
+      "label": "bush",
+      "category": "flora"
+    }
+  ],
+  "rows": [
+    {
+      "id": "quadruped-1337",
+      "label": "quadruped / 1337",
+      "category": "critters",
+      "view": "front",
+      "file": "model-final-quadruped-1337-front.png",
+      "primitives": 23,
+      "coverage": 0.12311666666666667
+    },
+    {
+      "id": "quadruped-1337",
+      "label": "quadruped / 1337",
+      "category": "critters",
+      "view": "side",
+      "file": "model-final-quadruped-1337-side.png",
+      "primitives": 23,
+      "coverage": 0.17605
+    },
+    {
+      "id": "quadruped-1337",
+      "label": "quadruped / 1337",
+      "category": "critters",
+      "view": "back",
+      "file": "model-final-quadruped-1337-back.png",
+      "primitives": 23,
+      "coverage": 0.13103333333333333
+    },
+    {
+      "id": "quadruped-1337-hat-0",
+      "label": "quadruped / hat 0",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-quadruped-1337-0.png"
+    },
+    {
+      "id": "quadruped-1337-hat-1",
+      "label": "quadruped / hat 1",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-quadruped-1337-1.png"
+    },
+    {
+      "id": "quadruped-1337-hat-2",
+      "label": "quadruped / hat 2",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-quadruped-1337-2.png"
+    },
+    {
+      "id": "quadruped-1337-hat-3",
+      "label": "quadruped / hat 3",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-quadruped-1337-3.png"
+    },
+    {
+      "id": "quadruped-1337-hat-4",
+      "label": "quadruped / hat 4",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-quadruped-1337-4.png"
+    },
+    {
+      "id": "quadruped-1337-hat-5",
+      "label": "quadruped / hat 5",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-quadruped-1337-5.png"
+    },
+    {
+      "id": "quadruped-1337-hat-6",
+      "label": "quadruped / hat 6",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-quadruped-1337-6.png"
+    },
+    {
+      "id": "quadruped-1337-hat-7",
+      "label": "quadruped / hat 7",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-quadruped-1337-7.png"
+    },
+    {
+      "id": "quadruped-2069",
+      "label": "quadruped / 2069",
+      "category": "critters",
+      "view": "front",
+      "file": "model-final-quadruped-2069-front.png",
+      "primitives": 18,
+      "coverage": 0.16309166666666666
+    },
+    {
+      "id": "quadruped-2069",
+      "label": "quadruped / 2069",
+      "category": "critters",
+      "view": "side",
+      "file": "model-final-quadruped-2069-side.png",
+      "primitives": 18,
+      "coverage": 0.21076666666666666
+    },
+    {
+      "id": "quadruped-2069",
+      "label": "quadruped / 2069",
+      "category": "critters",
+      "view": "back",
+      "file": "model-final-quadruped-2069-back.png",
+      "primitives": 18,
+      "coverage": 0.16410833333333333
+    },
+    {
+      "id": "quadruped-8675309",
+      "label": "quadruped / 8675309",
+      "category": "critters",
+      "view": "front",
+      "file": "model-final-quadruped-8675309-front.png",
+      "primitives": 18,
+      "coverage": 0.15189166666666667
+    },
+    {
+      "id": "quadruped-8675309",
+      "label": "quadruped / 8675309",
+      "category": "critters",
+      "view": "side",
+      "file": "model-final-quadruped-8675309-side.png",
+      "primitives": 18,
+      "coverage": 0.209375
+    },
+    {
+      "id": "quadruped-8675309",
+      "label": "quadruped / 8675309",
+      "category": "critters",
+      "view": "back",
+      "file": "model-final-quadruped-8675309-back.png",
+      "primitives": 18,
+      "coverage": 0.158
+    },
+    {
+      "id": "biped-1337",
+      "label": "biped / 1337",
+      "category": "critters",
+      "view": "front",
+      "file": "model-final-biped-1337-front.png",
+      "primitives": 21,
+      "coverage": 0.283725
+    },
+    {
+      "id": "biped-1337",
+      "label": "biped / 1337",
+      "category": "critters",
+      "view": "side",
+      "file": "model-final-biped-1337-side.png",
+      "primitives": 21,
+      "coverage": 0.259375
+    },
+    {
+      "id": "biped-1337",
+      "label": "biped / 1337",
+      "category": "critters",
+      "view": "back",
+      "file": "model-final-biped-1337-back.png",
+      "primitives": 21,
+      "coverage": 0.285175
+    },
+    {
+      "id": "biped-1337-hat-0",
+      "label": "biped / hat 0",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-biped-1337-0.png"
+    },
+    {
+      "id": "biped-1337-hat-1",
+      "label": "biped / hat 1",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-biped-1337-1.png"
+    },
+    {
+      "id": "biped-1337-hat-2",
+      "label": "biped / hat 2",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-biped-1337-2.png"
+    },
+    {
+      "id": "biped-1337-hat-3",
+      "label": "biped / hat 3",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-biped-1337-3.png"
+    },
+    {
+      "id": "biped-1337-hat-4",
+      "label": "biped / hat 4",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-biped-1337-4.png"
+    },
+    {
+      "id": "biped-1337-hat-5",
+      "label": "biped / hat 5",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-biped-1337-5.png"
+    },
+    {
+      "id": "biped-1337-hat-6",
+      "label": "biped / hat 6",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-biped-1337-6.png"
+    },
+    {
+      "id": "biped-1337-hat-7",
+      "label": "biped / hat 7",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-biped-1337-7.png"
+    },
+    {
+      "id": "biped-2069",
+      "label": "biped / 2069",
+      "category": "critters",
+      "view": "front",
+      "file": "model-final-biped-2069-front.png",
+      "primitives": 19,
+      "coverage": 0.20568333333333333
+    },
+    {
+      "id": "biped-2069",
+      "label": "biped / 2069",
+      "category": "critters",
+      "view": "side",
+      "file": "model-final-biped-2069-side.png",
+      "primitives": 19,
+      "coverage": 0.185975
+    },
+    {
+      "id": "biped-2069",
+      "label": "biped / 2069",
+      "category": "critters",
+      "view": "back",
+      "file": "model-final-biped-2069-back.png",
+      "primitives": 19,
+      "coverage": 0.208175
+    },
+    {
+      "id": "biped-8675309",
+      "label": "biped / 8675309",
+      "category": "critters",
+      "view": "front",
+      "file": "model-final-biped-8675309-front.png",
+      "primitives": 17,
+      "coverage": 0.28175
+    },
+    {
+      "id": "biped-8675309",
+      "label": "biped / 8675309",
+      "category": "critters",
+      "view": "side",
+      "file": "model-final-biped-8675309-side.png",
+      "primitives": 17,
+      "coverage": 0.27103333333333335
+    },
+    {
+      "id": "biped-8675309",
+      "label": "biped / 8675309",
+      "category": "critters",
+      "view": "back",
+      "file": "model-final-biped-8675309-back.png",
+      "primitives": 17,
+      "coverage": 0.2872416666666667
+    },
+    {
+      "id": "hopper-1337",
+      "label": "hopper / 1337",
+      "category": "critters",
+      "view": "front",
+      "file": "model-final-hopper-1337-front.png",
+      "primitives": 9,
+      "coverage": 0.261575
+    },
+    {
+      "id": "hopper-1337",
+      "label": "hopper / 1337",
+      "category": "critters",
+      "view": "side",
+      "file": "model-final-hopper-1337-side.png",
+      "primitives": 9,
+      "coverage": 0.2503166666666667
+    },
+    {
+      "id": "hopper-1337",
+      "label": "hopper / 1337",
+      "category": "critters",
+      "view": "back",
+      "file": "model-final-hopper-1337-back.png",
+      "primitives": 9,
+      "coverage": 0.2402
+    },
+    {
+      "id": "hopper-1337-hat-0",
+      "label": "hopper / hat 0",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-hopper-1337-0.png"
+    },
+    {
+      "id": "hopper-1337-hat-1",
+      "label": "hopper / hat 1",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-hopper-1337-1.png"
+    },
+    {
+      "id": "hopper-1337-hat-2",
+      "label": "hopper / hat 2",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-hopper-1337-2.png"
+    },
+    {
+      "id": "hopper-1337-hat-3",
+      "label": "hopper / hat 3",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-hopper-1337-3.png"
+    },
+    {
+      "id": "hopper-1337-hat-4",
+      "label": "hopper / hat 4",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-hopper-1337-4.png"
+    },
+    {
+      "id": "hopper-1337-hat-5",
+      "label": "hopper / hat 5",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-hopper-1337-5.png"
+    },
+    {
+      "id": "hopper-1337-hat-6",
+      "label": "hopper / hat 6",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-hopper-1337-6.png"
+    },
+    {
+      "id": "hopper-1337-hat-7",
+      "label": "hopper / hat 7",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-hopper-1337-7.png"
+    },
+    {
+      "id": "hopper-2069",
+      "label": "hopper / 2069",
+      "category": "critters",
+      "view": "front",
+      "file": "model-final-hopper-2069-front.png",
+      "primitives": 9,
+      "coverage": 0.20795833333333333
+    },
+    {
+      "id": "hopper-2069",
+      "label": "hopper / 2069",
+      "category": "critters",
+      "view": "side",
+      "file": "model-final-hopper-2069-side.png",
+      "primitives": 9,
+      "coverage": 0.20051666666666668
+    },
+    {
+      "id": "hopper-2069",
+      "label": "hopper / 2069",
+      "category": "critters",
+      "view": "back",
+      "file": "model-final-hopper-2069-back.png",
+      "primitives": 9,
+      "coverage": 0.2054
+    },
+    {
+      "id": "hopper-8675309",
+      "label": "hopper / 8675309",
+      "category": "critters",
+      "view": "front",
+      "file": "model-final-hopper-8675309-front.png",
+      "primitives": 10,
+      "coverage": 0.25215
+    },
+    {
+      "id": "hopper-8675309",
+      "label": "hopper / 8675309",
+      "category": "critters",
+      "view": "side",
+      "file": "model-final-hopper-8675309-side.png",
+      "primitives": 10,
+      "coverage": 0.241
+    },
+    {
+      "id": "hopper-8675309",
+      "label": "hopper / 8675309",
+      "category": "critters",
+      "view": "back",
+      "file": "model-final-hopper-8675309-back.png",
+      "primitives": 10,
+      "coverage": 0.2309
+    },
+    {
+      "id": "multiped-1337",
+      "label": "multiped / 1337",
+      "category": "critters",
+      "view": "front",
+      "file": "model-final-multiped-1337-front.png",
+      "primitives": 23,
+      "coverage": 0.25729166666666664
+    },
+    {
+      "id": "multiped-1337",
+      "label": "multiped / 1337",
+      "category": "critters",
+      "view": "side",
+      "file": "model-final-multiped-1337-side.png",
+      "primitives": 23,
+      "coverage": 0.243925
+    },
+    {
+      "id": "multiped-1337",
+      "label": "multiped / 1337",
+      "category": "critters",
+      "view": "back",
+      "file": "model-final-multiped-1337-back.png",
+      "primitives": 23,
+      "coverage": 0.228125
+    },
+    {
+      "id": "multiped-1337-hat-0",
+      "label": "multiped / hat 0",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-multiped-1337-0.png"
+    },
+    {
+      "id": "multiped-1337-hat-1",
+      "label": "multiped / hat 1",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-multiped-1337-1.png"
+    },
+    {
+      "id": "multiped-1337-hat-2",
+      "label": "multiped / hat 2",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-multiped-1337-2.png"
+    },
+    {
+      "id": "multiped-1337-hat-3",
+      "label": "multiped / hat 3",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-multiped-1337-3.png"
+    },
+    {
+      "id": "multiped-1337-hat-4",
+      "label": "multiped / hat 4",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-multiped-1337-4.png"
+    },
+    {
+      "id": "multiped-1337-hat-5",
+      "label": "multiped / hat 5",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-multiped-1337-5.png"
+    },
+    {
+      "id": "multiped-1337-hat-6",
+      "label": "multiped / hat 6",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-multiped-1337-6.png"
+    },
+    {
+      "id": "multiped-1337-hat-7",
+      "label": "multiped / hat 7",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-multiped-1337-7.png"
+    },
+    {
+      "id": "multiped-2069",
+      "label": "multiped / 2069",
+      "category": "critters",
+      "view": "front",
+      "file": "model-final-multiped-2069-front.png",
+      "primitives": 23,
+      "coverage": 0.27263333333333334
+    },
+    {
+      "id": "multiped-2069",
+      "label": "multiped / 2069",
+      "category": "critters",
+      "view": "side",
+      "file": "model-final-multiped-2069-side.png",
+      "primitives": 23,
+      "coverage": 0.26166666666666666
+    },
+    {
+      "id": "multiped-2069",
+      "label": "multiped / 2069",
+      "category": "critters",
+      "view": "back",
+      "file": "model-final-multiped-2069-back.png",
+      "primitives": 23,
+      "coverage": 0.23795833333333333
+    },
+    {
+      "id": "multiped-8675309",
+      "label": "multiped / 8675309",
+      "category": "critters",
+      "view": "front",
+      "file": "model-final-multiped-8675309-front.png",
+      "primitives": 27,
+      "coverage": 0.2566833333333333
+    },
+    {
+      "id": "multiped-8675309",
+      "label": "multiped / 8675309",
+      "category": "critters",
+      "view": "side",
+      "file": "model-final-multiped-8675309-side.png",
+      "primitives": 27,
+      "coverage": 0.242575
+    },
+    {
+      "id": "multiped-8675309",
+      "label": "multiped / 8675309",
+      "category": "critters",
+      "view": "back",
+      "file": "model-final-multiped-8675309-back.png",
+      "primitives": 27,
+      "coverage": 0.23315
+    },
+    {
+      "id": "serpent-1337",
+      "label": "serpent / 1337",
+      "category": "critters",
+      "view": "front",
+      "file": "model-final-serpent-1337-front.png",
+      "primitives": 13,
+      "coverage": 0.0598
+    },
+    {
+      "id": "serpent-1337",
+      "label": "serpent / 1337",
+      "category": "critters",
+      "view": "side",
+      "file": "model-final-serpent-1337-side.png",
+      "primitives": 13,
+      "coverage": 0.0716
+    },
+    {
+      "id": "serpent-1337",
+      "label": "serpent / 1337",
+      "category": "critters",
+      "view": "back",
+      "file": "model-final-serpent-1337-back.png",
+      "primitives": 13,
+      "coverage": 0.04926666666666667
+    },
+    {
+      "id": "serpent-1337-hat-0",
+      "label": "serpent / hat 0",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-serpent-1337-0.png"
+    },
+    {
+      "id": "serpent-1337-hat-1",
+      "label": "serpent / hat 1",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-serpent-1337-1.png"
+    },
+    {
+      "id": "serpent-1337-hat-2",
+      "label": "serpent / hat 2",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-serpent-1337-2.png"
+    },
+    {
+      "id": "serpent-1337-hat-3",
+      "label": "serpent / hat 3",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-serpent-1337-3.png"
+    },
+    {
+      "id": "serpent-1337-hat-4",
+      "label": "serpent / hat 4",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-serpent-1337-4.png"
+    },
+    {
+      "id": "serpent-1337-hat-5",
+      "label": "serpent / hat 5",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-serpent-1337-5.png"
+    },
+    {
+      "id": "serpent-1337-hat-6",
+      "label": "serpent / hat 6",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-serpent-1337-6.png"
+    },
+    {
+      "id": "serpent-1337-hat-7",
+      "label": "serpent / hat 7",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-serpent-1337-7.png"
+    },
+    {
+      "id": "serpent-2069",
+      "label": "serpent / 2069",
+      "category": "critters",
+      "view": "front",
+      "file": "model-final-serpent-2069-front.png",
+      "primitives": 12,
+      "coverage": 0.04920833333333333
+    },
+    {
+      "id": "serpent-2069",
+      "label": "serpent / 2069",
+      "category": "critters",
+      "view": "side",
+      "file": "model-final-serpent-2069-side.png",
+      "primitives": 12,
+      "coverage": 0.0609
+    },
+    {
+      "id": "serpent-2069",
+      "label": "serpent / 2069",
+      "category": "critters",
+      "view": "back",
+      "file": "model-final-serpent-2069-back.png",
+      "primitives": 12,
+      "coverage": 0.041
+    },
+    {
+      "id": "serpent-8675309",
+      "label": "serpent / 8675309",
+      "category": "critters",
+      "view": "front",
+      "file": "model-final-serpent-8675309-front.png",
+      "primitives": 13,
+      "coverage": 0.07066666666666667
+    },
+    {
+      "id": "serpent-8675309",
+      "label": "serpent / 8675309",
+      "category": "critters",
+      "view": "side",
+      "file": "model-final-serpent-8675309-side.png",
+      "primitives": 13,
+      "coverage": 0.08118333333333333
+    },
+    {
+      "id": "serpent-8675309",
+      "label": "serpent / 8675309",
+      "category": "critters",
+      "view": "back",
+      "file": "model-final-serpent-8675309-back.png",
+      "primitives": 13,
+      "coverage": 0.05710833333333333
+    },
+    {
+      "id": "flyer-1337",
+      "label": "flyer / 1337",
+      "category": "critters",
+      "view": "front",
+      "file": "model-final-flyer-1337-front.png",
+      "primitives": 13,
+      "coverage": 0.34470833333333334
+    },
+    {
+      "id": "flyer-1337",
+      "label": "flyer / 1337",
+      "category": "critters",
+      "view": "side",
+      "file": "model-final-flyer-1337-side.png",
+      "primitives": 13,
+      "coverage": 0.341875
+    },
+    {
+      "id": "flyer-1337",
+      "label": "flyer / 1337",
+      "category": "critters",
+      "view": "back",
+      "file": "model-final-flyer-1337-back.png",
+      "primitives": 13,
+      "coverage": 0.366875
+    },
+    {
+      "id": "flyer-1337-hat-0",
+      "label": "flyer / hat 0",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-flyer-1337-0.png"
+    },
+    {
+      "id": "flyer-1337-hat-1",
+      "label": "flyer / hat 1",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-flyer-1337-1.png"
+    },
+    {
+      "id": "flyer-1337-hat-2",
+      "label": "flyer / hat 2",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-flyer-1337-2.png"
+    },
+    {
+      "id": "flyer-1337-hat-3",
+      "label": "flyer / hat 3",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-flyer-1337-3.png"
+    },
+    {
+      "id": "flyer-1337-hat-4",
+      "label": "flyer / hat 4",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-flyer-1337-4.png"
+    },
+    {
+      "id": "flyer-1337-hat-5",
+      "label": "flyer / hat 5",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-flyer-1337-5.png"
+    },
+    {
+      "id": "flyer-1337-hat-6",
+      "label": "flyer / hat 6",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-flyer-1337-6.png"
+    },
+    {
+      "id": "flyer-1337-hat-7",
+      "label": "flyer / hat 7",
+      "category": "attachments",
+      "view": "front",
+      "file": "model-final-attachment-flyer-1337-7.png"
+    },
+    {
+      "id": "flyer-2069",
+      "label": "flyer / 2069",
+      "category": "critters",
+      "view": "front",
+      "file": "model-final-flyer-2069-front.png",
+      "primitives": 13,
+      "coverage": 0.2930833333333333
+    },
+    {
+      "id": "flyer-2069",
+      "label": "flyer / 2069",
+      "category": "critters",
+      "view": "side",
+      "file": "model-final-flyer-2069-side.png",
+      "primitives": 13,
+      "coverage": 0.280125
+    },
+    {
+      "id": "flyer-2069",
+      "label": "flyer / 2069",
+      "category": "critters",
+      "view": "back",
+      "file": "model-final-flyer-2069-back.png",
+      "primitives": 13,
+      "coverage": 0.27958333333333335
+    },
+    {
+      "id": "flyer-8675309",
+      "label": "flyer / 8675309",
+      "category": "critters",
+      "view": "front",
+      "file": "model-final-flyer-8675309-front.png",
+      "primitives": 13,
+      "coverage": 0.32634166666666664
+    },
+    {
+      "id": "flyer-8675309",
+      "label": "flyer / 8675309",
+      "category": "critters",
+      "view": "side",
+      "file": "model-final-flyer-8675309-side.png",
+      "primitives": 13,
+      "coverage": 0.3171583333333333
+    },
+    {
+      "id": "flyer-8675309",
+      "label": "flyer / 8675309",
+      "category": "critters",
+      "view": "back",
+      "file": "model-final-flyer-8675309-back.png",
+      "primitives": 13,
+      "coverage": 0.3273083333333333
+    },
+    {
+      "id": "hat-0",
+      "label": "party cone",
+      "category": "hats",
+      "view": "front",
+      "file": "model-final-hat-0-front.png",
+      "coverage": 0.158675
+    },
+    {
+      "id": "hat-0",
+      "label": "party cone",
+      "category": "hats",
+      "view": "side",
+      "file": "model-final-hat-0-side.png",
+      "coverage": 0.15859166666666666
+    },
+    {
+      "id": "hat-0",
+      "label": "party cone",
+      "category": "hats",
+      "view": "back",
+      "file": "model-final-hat-0-back.png",
+      "coverage": 0.15860833333333332
+    },
+    {
+      "id": "hat-1",
+      "label": "top hat",
+      "category": "hats",
+      "view": "front",
+      "file": "model-final-hat-1-front.png",
+      "coverage": 0.216575
+    },
+    {
+      "id": "hat-1",
+      "label": "top hat",
+      "category": "hats",
+      "view": "side",
+      "file": "model-final-hat-1-side.png",
+      "coverage": 0.21665
+    },
+    {
+      "id": "hat-1",
+      "label": "top hat",
+      "category": "hats",
+      "view": "back",
+      "file": "model-final-hat-1-back.png",
+      "coverage": 0.2166
+    },
+    {
+      "id": "hat-2",
+      "label": "wizard hat",
+      "category": "hats",
+      "view": "front",
+      "file": "model-final-hat-2-front.png",
+      "coverage": 0.18426666666666666
+    },
+    {
+      "id": "hat-2",
+      "label": "wizard hat",
+      "category": "hats",
+      "view": "side",
+      "file": "model-final-hat-2-side.png",
+      "coverage": 0.18225
+    },
+    {
+      "id": "hat-2",
+      "label": "wizard hat",
+      "category": "hats",
+      "view": "back",
+      "file": "model-final-hat-2-back.png",
+      "coverage": 0.18540833333333334
+    },
+    {
+      "id": "hat-3",
+      "label": "crown",
+      "category": "hats",
+      "view": "front",
+      "file": "model-final-hat-3-front.png",
+      "coverage": 0.17711666666666667
+    },
+    {
+      "id": "hat-3",
+      "label": "crown",
+      "category": "hats",
+      "view": "side",
+      "file": "model-final-hat-3-side.png",
+      "coverage": 0.17788333333333334
+    },
+    {
+      "id": "hat-3",
+      "label": "crown",
+      "category": "hats",
+      "view": "back",
+      "file": "model-final-hat-3-back.png",
+      "coverage": 0.183075
+    },
+    {
+      "id": "hat-4",
+      "label": "toadstool",
+      "category": "hats",
+      "view": "front",
+      "file": "model-final-hat-4-front.png",
+      "coverage": 0.15964166666666665
+    },
+    {
+      "id": "hat-4",
+      "label": "toadstool",
+      "category": "hats",
+      "view": "side",
+      "file": "model-final-hat-4-side.png",
+      "coverage": 0.159325
+    },
+    {
+      "id": "hat-4",
+      "label": "toadstool",
+      "category": "hats",
+      "view": "back",
+      "file": "model-final-hat-4-back.png",
+      "coverage": 0.15981666666666666
+    },
+    {
+      "id": "hat-5",
+      "label": "daisy",
+      "category": "hats",
+      "view": "front",
+      "file": "model-final-hat-5-front.png",
+      "coverage": 0.07250833333333333
+    },
+    {
+      "id": "hat-5",
+      "label": "daisy",
+      "category": "hats",
+      "view": "side",
+      "file": "model-final-hat-5-side.png",
+      "coverage": 0.07358333333333333
+    },
+    {
+      "id": "hat-5",
+      "label": "daisy",
+      "category": "hats",
+      "view": "back",
+      "file": "model-final-hat-5-back.png",
+      "coverage": 0.07566666666666666
+    },
+    {
+      "id": "hat-6",
+      "label": "halo",
+      "category": "hats",
+      "view": "front",
+      "file": "model-final-hat-6-front.png",
+      "coverage": 0.06175
+    },
+    {
+      "id": "hat-6",
+      "label": "halo",
+      "category": "hats",
+      "view": "side",
+      "file": "model-final-hat-6-side.png",
+      "coverage": 0.06175
+    },
+    {
+      "id": "hat-6",
+      "label": "halo",
+      "category": "hats",
+      "view": "back",
+      "file": "model-final-hat-6-back.png",
+      "coverage": 0.06175
+    },
+    {
+      "id": "hat-7",
+      "label": "propeller beanie",
+      "category": "hats",
+      "view": "front",
+      "file": "model-final-hat-7-front.png",
+      "coverage": 0.167575
+    },
+    {
+      "id": "hat-7",
+      "label": "propeller beanie",
+      "category": "hats",
+      "view": "side",
+      "file": "model-final-hat-7-side.png",
+      "coverage": 0.16443333333333332
+    },
+    {
+      "id": "hat-7",
+      "label": "propeller beanie",
+      "category": "hats",
+      "view": "back",
+      "file": "model-final-hat-7-back.png",
+      "coverage": 0.16723333333333334
+    },
+    {
+      "id": "skateboard",
+      "label": "skateboard",
+      "category": "equipment",
+      "view": "front",
+      "file": "model-final-skateboard-front.png",
+      "coverage": 0.053033333333333335
+    },
+    {
+      "id": "skateboard",
+      "label": "skateboard",
+      "category": "equipment",
+      "view": "side",
+      "file": "model-final-skateboard-side.png",
+      "coverage": 0.0408
+    },
+    {
+      "id": "skateboard",
+      "label": "skateboard",
+      "category": "equipment",
+      "view": "back",
+      "file": "model-final-skateboard-back.png",
+      "coverage": 0.052066666666666664
+    },
+    {
+      "id": "rod",
+      "label": "fishing rod",
+      "category": "equipment",
+      "view": "front",
+      "file": "model-final-rod-front.png",
+      "coverage": 0.022325
+    },
+    {
+      "id": "rod",
+      "label": "fishing rod",
+      "category": "equipment",
+      "view": "side",
+      "file": "model-final-rod-side.png",
+      "coverage": 0.019225
+    },
+    {
+      "id": "rod",
+      "label": "fishing rod",
+      "category": "equipment",
+      "view": "back",
+      "file": "model-final-rod-back.png",
+      "coverage": 0.013041666666666667
+    },
+    {
+      "id": "bobber",
+      "label": "bobber",
+      "category": "equipment",
+      "view": "front",
+      "file": "model-final-bobber-front.png",
+      "coverage": 0.08419166666666666
+    },
+    {
+      "id": "bobber",
+      "label": "bobber",
+      "category": "equipment",
+      "view": "side",
+      "file": "model-final-bobber-side.png",
+      "coverage": 0.08385833333333333
+    },
+    {
+      "id": "bobber",
+      "label": "bobber",
+      "category": "equipment",
+      "view": "back",
+      "file": "model-final-bobber-back.png",
+      "coverage": 0.08425833333333334
+    },
+    {
+      "id": "fish-Snapper",
+      "label": "Mossy Snapper",
+      "category": "fish",
+      "view": "front",
+      "file": "model-final-fish-Snapper-front.png",
+      "coverage": 0.13049166666666667
+    },
+    {
+      "id": "fish-Snapper",
+      "label": "Mossy Snapper",
+      "category": "fish",
+      "view": "side",
+      "file": "model-final-fish-Snapper-side.png",
+      "coverage": 0.08411666666666667
+    },
+    {
+      "id": "fish-Snapper",
+      "label": "Mossy Snapper",
+      "category": "fish",
+      "view": "back",
+      "file": "model-final-fish-Snapper-back.png",
+      "coverage": 0.12865833333333335
+    },
+    {
+      "id": "fish-Wisp",
+      "label": "Mossy Wisp",
+      "category": "fish",
+      "view": "front",
+      "file": "model-final-fish-Wisp-front.png",
+      "coverage": 0.04049166666666667
+    },
+    {
+      "id": "fish-Wisp",
+      "label": "Mossy Wisp",
+      "category": "fish",
+      "view": "side",
+      "file": "model-final-fish-Wisp-side.png",
+      "coverage": 0.022033333333333332
+    },
+    {
+      "id": "fish-Wisp",
+      "label": "Mossy Wisp",
+      "category": "fish",
+      "view": "back",
+      "file": "model-final-fish-Wisp-back.png",
+      "coverage": 0.041925
+    },
+    {
+      "id": "fish-Carp",
+      "label": "Mossy Carp",
+      "category": "fish",
+      "view": "front",
+      "file": "model-final-fish-Carp-front.png",
+      "coverage": 0.19086666666666666
+    },
+    {
+      "id": "fish-Carp",
+      "label": "Mossy Carp",
+      "category": "fish",
+      "view": "side",
+      "file": "model-final-fish-Carp-side.png",
+      "coverage": 0.1386
+    },
+    {
+      "id": "fish-Carp",
+      "label": "Mossy Carp",
+      "category": "fish",
+      "view": "back",
+      "file": "model-final-fish-Carp-back.png",
+      "coverage": 0.18795833333333334
+    },
+    {
+      "id": "fish-Puffer",
+      "label": "Mossy Puffer",
+      "category": "fish",
+      "view": "front",
+      "file": "model-final-fish-Puffer-front.png",
+      "coverage": 0.19675833333333334
+    },
+    {
+      "id": "fish-Puffer",
+      "label": "Mossy Puffer",
+      "category": "fish",
+      "view": "side",
+      "file": "model-final-fish-Puffer-side.png",
+      "coverage": 0.19270833333333334
+    },
+    {
+      "id": "fish-Puffer",
+      "label": "Mossy Puffer",
+      "category": "fish",
+      "view": "back",
+      "file": "model-final-fish-Puffer-back.png",
+      "coverage": 0.19641666666666666
+    },
+    {
+      "id": "fish-Sardine",
+      "label": "Mossy Sardine",
+      "category": "fish",
+      "view": "front",
+      "file": "model-final-fish-Sardine-front.png",
+      "coverage": 0.07286666666666666
+    },
+    {
+      "id": "fish-Sardine",
+      "label": "Mossy Sardine",
+      "category": "fish",
+      "view": "side",
+      "file": "model-final-fish-Sardine-side.png",
+      "coverage": 0.03988333333333333
+    },
+    {
+      "id": "fish-Sardine",
+      "label": "Mossy Sardine",
+      "category": "fish",
+      "view": "back",
+      "file": "model-final-fish-Sardine-back.png",
+      "coverage": 0.0729
+    },
+    {
+      "id": "fish-Koi",
+      "label": "Mossy Koi",
+      "category": "fish",
+      "view": "front",
+      "file": "model-final-fish-Koi-front.png",
+      "coverage": 0.08471666666666666
+    },
+    {
+      "id": "fish-Koi",
+      "label": "Mossy Koi",
+      "category": "fish",
+      "view": "side",
+      "file": "model-final-fish-Koi-side.png",
+      "coverage": 0.056258333333333334
+    },
+    {
+      "id": "fish-Koi",
+      "label": "Mossy Koi",
+      "category": "fish",
+      "view": "back",
+      "file": "model-final-fish-Koi-back.png",
+      "coverage": 0.08466666666666667
+    },
+    {
+      "id": "fish-Dab",
+      "label": "Mossy Dab",
+      "category": "fish",
+      "view": "front",
+      "file": "model-final-fish-Dab-front.png",
+      "coverage": 0.18279166666666666
+    },
+    {
+      "id": "fish-Dab",
+      "label": "Mossy Dab",
+      "category": "fish",
+      "view": "side",
+      "file": "model-final-fish-Dab-side.png",
+      "coverage": 0.07684166666666667
+    },
+    {
+      "id": "fish-Dab",
+      "label": "Mossy Dab",
+      "category": "fish",
+      "view": "back",
+      "file": "model-final-fish-Dab-back.png",
+      "coverage": 0.18105833333333332
+    },
+    {
+      "id": "fish-Chub",
+      "label": "Mossy Chub",
+      "category": "fish",
+      "view": "front",
+      "file": "model-final-fish-Chub-front.png",
+      "coverage": 0.16581666666666667
+    },
+    {
+      "id": "fish-Chub",
+      "label": "Mossy Chub",
+      "category": "fish",
+      "view": "side",
+      "file": "model-final-fish-Chub-side.png",
+      "coverage": 0.12589166666666668
+    },
+    {
+      "id": "fish-Chub",
+      "label": "Mossy Chub",
+      "category": "fish",
+      "view": "back",
+      "file": "model-final-fish-Chub-back.png",
+      "coverage": 0.16308333333333333
+    },
+    {
+      "id": "fish-Minnow",
+      "label": "Mossy Minnow",
+      "category": "fish",
+      "view": "front",
+      "file": "model-final-fish-Minnow-front.png",
+      "coverage": 0.06915833333333334
+    },
+    {
+      "id": "fish-Minnow",
+      "label": "Mossy Minnow",
+      "category": "fish",
+      "view": "side",
+      "file": "model-final-fish-Minnow-side.png",
+      "coverage": 0.04015
+    },
+    {
+      "id": "fish-Minnow",
+      "label": "Mossy Minnow",
+      "category": "fish",
+      "view": "back",
+      "file": "model-final-fish-Minnow-back.png",
+      "coverage": 0.069325
+    },
+    {
+      "id": "fish-Gulper",
+      "label": "Mossy Gulper",
+      "category": "fish",
+      "view": "front",
+      "file": "model-final-fish-Gulper-front.png",
+      "coverage": 0.17535833333333334
+    },
+    {
+      "id": "fish-Gulper",
+      "label": "Mossy Gulper",
+      "category": "fish",
+      "view": "side",
+      "file": "model-final-fish-Gulper-side.png",
+      "coverage": 0.161625
+    },
+    {
+      "id": "fish-Gulper",
+      "label": "Mossy Gulper",
+      "category": "fish",
+      "view": "back",
+      "file": "model-final-fish-Gulper-back.png",
+      "coverage": 0.1736
+    },
+    {
+      "id": "fish-Bloop",
+      "label": "Mossy Bloop",
+      "category": "fish",
+      "view": "front",
+      "file": "model-final-fish-Bloop-front.png",
+      "coverage": 0.17459166666666667
+    },
+    {
+      "id": "fish-Bloop",
+      "label": "Mossy Bloop",
+      "category": "fish",
+      "view": "side",
+      "file": "model-final-fish-Bloop-side.png",
+      "coverage": 0.183575
+    },
+    {
+      "id": "fish-Bloop",
+      "label": "Mossy Bloop",
+      "category": "fish",
+      "view": "back",
+      "file": "model-final-fish-Bloop-back.png",
+      "coverage": 0.17283333333333334
+    },
+    {
+      "id": "fish-Guppy",
+      "label": "Mossy Guppy",
+      "category": "fish",
+      "view": "front",
+      "file": "model-final-fish-Guppy-front.png",
+      "coverage": 0.08923333333333333
+    },
+    {
+      "id": "fish-Guppy",
+      "label": "Mossy Guppy",
+      "category": "fish",
+      "view": "side",
+      "file": "model-final-fish-Guppy-side.png",
+      "coverage": 0.05479166666666667
+    },
+    {
+      "id": "fish-Guppy",
+      "label": "Mossy Guppy",
+      "category": "fish",
+      "view": "back",
+      "file": "model-final-fish-Guppy-back.png",
+      "coverage": 0.090925
+    },
+    {
+      "id": "fish-gold",
+      "label": "golden fish",
+      "category": "fish",
+      "view": "front",
+      "file": "model-final-fish-gold-front.png",
+      "coverage": 0.18295833333333333
+    },
+    {
+      "id": "fish-gold",
+      "label": "golden fish",
+      "category": "fish",
+      "view": "side",
+      "file": "model-final-fish-gold-side.png",
+      "coverage": 0.07683333333333334
+    },
+    {
+      "id": "fish-gold",
+      "label": "golden fish",
+      "category": "fish",
+      "view": "back",
+      "file": "model-final-fish-gold-back.png",
+      "coverage": 0.1811
+    },
+    {
+      "id": "fir",
+      "label": "fir tree",
+      "category": "world",
+      "view": "front",
+      "file": "model-final-fir-front.png",
+      "coverage": 0.034541666666666665
+    },
+    {
+      "id": "fir",
+      "label": "fir tree",
+      "category": "world",
+      "view": "side",
+      "file": "model-final-fir-side.png",
+      "coverage": 0.050291666666666665
+    },
+    {
+      "id": "fir",
+      "label": "fir tree",
+      "category": "world",
+      "view": "back",
+      "file": "model-final-fir-back.png",
+      "coverage": 0.06569166666666666
+    },
+    {
+      "id": "broadleaf",
+      "label": "broadleaf tree",
+      "category": "world",
+      "view": "front",
+      "file": "model-final-broadleaf-front.png",
+      "coverage": 0.13539166666666666
+    },
+    {
+      "id": "broadleaf",
+      "label": "broadleaf tree",
+      "category": "world",
+      "view": "side",
+      "file": "model-final-broadleaf-side.png",
+      "coverage": 0.11683333333333333
+    },
+    {
+      "id": "broadleaf",
+      "label": "broadleaf tree",
+      "category": "world",
+      "view": "back",
+      "file": "model-final-broadleaf-back.png",
+      "coverage": 0.12185833333333333
+    },
+    {
+      "id": "bench",
+      "label": "log bench",
+      "category": "world",
+      "view": "front",
+      "file": "model-final-bench-front.png",
+      "coverage": 0.07068333333333333
+    },
+    {
+      "id": "bench",
+      "label": "log bench",
+      "category": "world",
+      "view": "side",
+      "file": "model-final-bench-side.png",
+      "coverage": 0.04534166666666667
+    },
+    {
+      "id": "bench",
+      "label": "log bench",
+      "category": "world",
+      "view": "back",
+      "file": "model-final-bench-back.png",
+      "coverage": 0.07045833333333333
+    },
+    {
+      "id": "lantern",
+      "label": "lantern",
+      "category": "world",
+      "view": "front",
+      "file": "model-final-lantern-front.png",
+      "coverage": 0.038358333333333335
+    },
+    {
+      "id": "lantern",
+      "label": "lantern",
+      "category": "world",
+      "view": "side",
+      "file": "model-final-lantern-side.png",
+      "coverage": 0.037766666666666664
+    },
+    {
+      "id": "lantern",
+      "label": "lantern",
+      "category": "world",
+      "view": "back",
+      "file": "model-final-lantern-back.png",
+      "coverage": 0.037875
+    },
+    {
+      "id": "festoon",
+      "label": "festoon lights",
+      "category": "world",
+      "view": "front",
+      "file": "model-final-festoon-front.png",
+      "coverage": 0.004
+    },
+    {
+      "id": "festoon",
+      "label": "festoon lights",
+      "category": "world",
+      "view": "side",
+      "file": "model-final-festoon-side.png",
+      "coverage": 0.0033
+    },
+    {
+      "id": "festoon",
+      "label": "festoon lights",
+      "category": "world",
+      "view": "back",
+      "file": "model-final-festoon-back.png",
+      "coverage": 0.0040416666666666665
+    },
+    {
+      "id": "rack",
+      "label": "hat rack",
+      "category": "world",
+      "view": "front",
+      "file": "model-final-rack-front.png",
+      "coverage": 0.08035833333333334
+    },
+    {
+      "id": "rack",
+      "label": "hat rack",
+      "category": "world",
+      "view": "side",
+      "file": "model-final-rack-side.png",
+      "coverage": 0.06461666666666667
+    },
+    {
+      "id": "rack",
+      "label": "hat rack",
+      "category": "world",
+      "view": "back",
+      "file": "model-final-rack-back.png",
+      "coverage": 0.07965833333333333
+    },
+    {
+      "id": "dock",
+      "label": "fishing dock",
+      "category": "world",
+      "view": "front",
+      "file": "model-final-dock-front.png",
+      "coverage": 0.13776666666666668
+    },
+    {
+      "id": "dock",
+      "label": "fishing dock",
+      "category": "world",
+      "view": "side",
+      "file": "model-final-dock-side.png",
+      "coverage": 0.13891666666666666
+    },
+    {
+      "id": "dock",
+      "label": "fishing dock",
+      "category": "world",
+      "view": "back",
+      "file": "model-final-dock-back.png",
+      "coverage": 0.13720833333333332
+    },
+    {
+      "id": "reeds",
+      "label": "shore reeds",
+      "category": "world",
+      "view": "front",
+      "file": "model-final-reeds-front.png",
+      "coverage": 0.040091666666666664
+    },
+    {
+      "id": "reeds",
+      "label": "shore reeds",
+      "category": "world",
+      "view": "side",
+      "file": "model-final-reeds-side.png",
+      "coverage": 0.023525
+    },
+    {
+      "id": "reeds",
+      "label": "shore reeds",
+      "category": "world",
+      "view": "back",
+      "file": "model-final-reeds-back.png",
+      "coverage": 0.036025
+    },
+    {
+      "id": "fire",
+      "label": "fire, stones and logs",
+      "category": "world",
+      "view": "front",
+      "file": "model-final-fire-front.png",
+      "coverage": 0.11384166666666666
+    },
+    {
+      "id": "fire",
+      "label": "fire, stones and logs",
+      "category": "world",
+      "view": "side",
+      "file": "model-final-fire-side.png",
+      "coverage": 0.10804166666666666
+    },
+    {
+      "id": "fire",
+      "label": "fire, stones and logs",
+      "category": "world",
+      "view": "back",
+      "file": "model-final-fire-back.png",
+      "coverage": 0.10643333333333334
+    },
+    {
+      "id": "boulder",
+      "label": "boulder",
+      "category": "flora",
+      "view": "front",
+      "file": "model-final-boulder-front.png",
+      "coverage": 0.07316666666666667
+    },
+    {
+      "id": "boulder",
+      "label": "boulder",
+      "category": "flora",
+      "view": "side",
+      "file": "model-final-boulder-side.png",
+      "coverage": 0.08588333333333334
+    },
+    {
+      "id": "boulder",
+      "label": "boulder",
+      "category": "flora",
+      "view": "back",
+      "file": "model-final-boulder-back.png",
+      "coverage": 0.09925833333333334
+    },
+    {
+      "id": "grass",
+      "label": "grass",
+      "category": "flora",
+      "view": "front",
+      "file": "model-final-grass-front.png",
+      "coverage": 0.0706
+    },
+    {
+      "id": "grass",
+      "label": "grass",
+      "category": "flora",
+      "view": "side",
+      "file": "model-final-grass-side.png",
+      "coverage": 0.07805
+    },
+    {
+      "id": "grass",
+      "label": "grass",
+      "category": "flora",
+      "view": "back",
+      "file": "model-final-grass-back.png",
+      "coverage": 0.07831666666666667
+    },
+    {
+      "id": "flower",
+      "label": "flower",
+      "category": "flora",
+      "view": "front",
+      "file": "model-final-flower-front.png",
+      "coverage": 0.056266666666666666
+    },
+    {
+      "id": "flower",
+      "label": "flower",
+      "category": "flora",
+      "view": "side",
+      "file": "model-final-flower-side.png",
+      "coverage": 0.05535
+    },
+    {
+      "id": "flower",
+      "label": "flower",
+      "category": "flora",
+      "view": "back",
+      "file": "model-final-flower-back.png",
+      "coverage": 0.050991666666666664
+    },
+    {
+      "id": "mushroom",
+      "label": "mushroom",
+      "category": "flora",
+      "view": "front",
+      "file": "model-final-mushroom-front.png",
+      "coverage": 0.164225
+    },
+    {
+      "id": "mushroom",
+      "label": "mushroom",
+      "category": "flora",
+      "view": "side",
+      "file": "model-final-mushroom-side.png",
+      "coverage": 0.163875
+    },
+    {
+      "id": "mushroom",
+      "label": "mushroom",
+      "category": "flora",
+      "view": "back",
+      "file": "model-final-mushroom-back.png",
+      "coverage": 0.163475
+    },
+    {
+      "id": "pebble",
+      "label": "pebble",
+      "category": "flora",
+      "view": "front",
+      "file": "model-final-pebble-front.png",
+      "coverage": 0.080375
+    },
+    {
+      "id": "pebble",
+      "label": "pebble",
+      "category": "flora",
+      "view": "side",
+      "file": "model-final-pebble-side.png",
+      "coverage": 0.08654166666666667
+    },
+    {
+      "id": "pebble",
+      "label": "pebble",
+      "category": "flora",
+      "view": "back",
+      "file": "model-final-pebble-back.png",
+      "coverage": 0.09335833333333333
+    },
+    {
+      "id": "stump",
+      "label": "stump",
+      "category": "flora",
+      "view": "front",
+      "file": "model-final-stump-front.png",
+      "coverage": 0.17215833333333333
+    },
+    {
+      "id": "stump",
+      "label": "stump",
+      "category": "flora",
+      "view": "side",
+      "file": "model-final-stump-side.png",
+      "coverage": 0.16830833333333334
+    },
+    {
+      "id": "stump",
+      "label": "stump",
+      "category": "flora",
+      "view": "back",
+      "file": "model-final-stump-back.png",
+      "coverage": 0.17275833333333335
+    },
+    {
+      "id": "bush",
+      "label": "bush",
+      "category": "flora",
+      "view": "front",
+      "file": "model-final-bush-front.png",
+      "coverage": 0.09858333333333333
+    },
+    {
+      "id": "bush",
+      "label": "bush",
+      "category": "flora",
+      "view": "side",
+      "file": "model-final-bush-side.png",
+      "coverage": 0.12479166666666666
+    },
+    {
+      "id": "bush",
+      "label": "bush",
+      "category": "flora",
+      "view": "back",
+      "file": "model-final-bush-back.png",
+      "coverage": 0.12209166666666667
+    }
+  ],
+  "errors": []
+}

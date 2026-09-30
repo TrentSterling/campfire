@@ -110,7 +110,7 @@ void main(){
   float conc=smoothstep(0.55,1.15,(dOwn-d0)/(kOwn*0.25));
   if(uIso>0.0001) isoW*=(1.0-0.85*conc);
   // buried verts tuck just under the skin (kills creases + z-fighting in overlaps)
-  float bury=smoothstep(0.70,1.25,(-d0)/max(rT,0.02));
+  float bury=smoothstep(0.12,0.50,(-d0)/max(rT,0.02));
   float buriedIso=(uIso>0.0001)?(-isoW*1.2):(-isoW*1.2-rT*0.06);
   if(uIso>0.0001&&uPrimD[pi].y>0.5){ bury=1.0; buriedIso=-rT*0.4-isoW*2.0; }
   if(uPrimD[pi].z>0.5){ bury=1.0; buriedIso=-rT*0.4-isoW*2.0; }
@@ -141,19 +141,19 @@ void main(){
   vec3 N=normalize(vNormal); vec3 Vv=normalize(cameraPosition-vWorldPos);
   float nl=dot(N,uSunDir)*0.5+0.5;
   float band=0.5+0.28*smoothstep(0.40,0.50,nl)+0.22*smoothstep(0.68,0.80,nl);
-  vec3 albedo=vColGloss.rgb; vec3 shadCol=albedo*vec3(0.55,0.52,0.72);
+  vec3 albedo=vColGloss.rgb; vec3 shadCol=albedo*vec3(0.40,0.56,0.61);
   vec3 col=mix(shadCol,albedo*1.02,band);
   vec3 toF=uFirePos-vWorldPos; float fdd=length(toF);
   float fl=max(dot(N,toF/max(fdd,1e-3)),0.0)*uFire/(1.0+0.07*fdd*fdd);
-  col+=fl*vec3(1.0,0.5,0.2);
-  float fr=pow(1.0-max(dot(N,Vv),0.0),3.0); col+=fr*vec3(0.24,0.22,0.32)*(0.3+0.5*nl);
+  col+=fl*vec3(.58,.29,.12)*(albedo*.65+.35);
+  float fr=pow(1.0-max(dot(N,Vv),0.0),3.0); col+=fr*vec3(.09,.10,.12)*(0.3+0.5*nl);
   // warm campfire rim + faint fill, critters only (uRim=1; props leave it 0) so
   // creatures glow like toys near the fire while terrain keeps the night grade
   float rimF=pow(1.0-max(dot(N,Vv),0.0),2.2);
-  col+=uRim*(rimF*vec3(0.42,0.26,0.13)+0.045*vec3(1.0,0.72,0.5));
+  col+=uRim*(rimF*vec3(.16,.10,.055)+.025*vec3(1.0,.72,.5));
   vec3 H=normalize(uSunDir+Vv); float spb=pow(max(dot(N,H),0.0),mix(20.0,80.0,vColGloss.a));
-  col+=smoothstep(0.55,0.7,spb)*vColGloss.a*vec3(0.8);
-  float luma=dot(col,vec3(0.299,0.587,0.114)); col=mix(vec3(luma),col,1.12);
+  col+=smoothstep(0.3,0.8,spb)*vColGloss.a*vec3(.24);
+  float luma=dot(col,vec3(0.299,0.587,0.114)); col=mix(vec3(luma),col,0.92);
   col=pow(clamp(col,0.0,1.0),vec3(0.4545));
   gl_FragColor=vec4(col,1.0);
 }`
@@ -161,12 +161,20 @@ void main(){
 export const CRIT_FSH_OUTLINE = `
 uniform vec3 uOutlineTint;
 varying vec3 vNormal; varying vec3 vWorldPos; varying vec4 vColGloss;
-void main(){ vec3 col=mix(vColGloss.rgb,uOutlineTint,0.68)*0.34; col=pow(clamp(col,0.0,1.0),vec3(0.4545)); gl_FragColor=vec4(col,1.0); }`
+void main(){
+  // A projected primitive can fold over inside a smooth union. Its triangle
+  // winding is then unsuitable for an inverted hull, but the field normal
+  // still identifies front-facing skin. Keep ink on the silhouette.
+  if(dot(normalize(vNormal),normalize(cameraPosition-vWorldPos))>0.12) discard;
+  vec3 col=mix(vColGloss.rgb,uOutlineTint,0.68)*0.34;
+  col=pow(clamp(col,0.0,1.0),vec3(0.4545)); gl_FragColor=vec4(col,1.0);
+}`
 
 // non-indexed per-prim sphere shells sized by max radius (props path)
 export function buildCritterGeo(prims) {
   const posChunks = [], apChunks = []
   prims.forEach((pr, i) => {
+    if (pr.colorOnly) return
     const r = Math.max(pr.r1, pr.r2)
     let w, h
     if (r >= 0.3) { w = 28; h = 20 } else if (r >= 0.14) { w = 18; h = 14 } else if (r >= 0.06) { w = 13; h = 10 } else { w = 9; h = 8 }

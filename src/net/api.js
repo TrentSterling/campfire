@@ -5,15 +5,22 @@
 import { state, peers } from '../state.js'
 import { bubble } from '../critter/tags.js'
 import { net } from './net.js'
-import { doJump, doPet, doWave } from '../moves.js'
+import { doJump, doPet, doWave, doRide } from '../moves.js'
 import { setZoom, getZoom } from '../player.js'
-import { isTouchDevice } from '../touch.js'
+import { setHat, HAT_COUNT, HAT_NAMES } from '../critter/gear.js'
+import { saveIdentity } from '../identity.js'
+import { doFish } from '../fishing.js'
+import { ownHat, myTitle } from '../progress.js'
+import { refreshHint } from '../ui.js'
 
 const chatLogArr = []
 const chatLogEl = document.getElementById('chatlog')
 const chatInput = document.getElementById('chatinput')
 const esc = s => String(s).replace(/[<>&]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]))
-function renderChatLog() { chatLogEl.innerHTML = chatLogArr.slice(-6).map(l => '<b>' + esc(l.name) + ':</b> ' + esc(l.text)).join('<br>') }
+function renderChatLog() {
+  chatLogEl.innerHTML = chatLogArr.slice(-6).map(l => '<p class="chat-line"><b>' + esc(l.name) + '</b><br>' + esc(l.text) + '</p>').join('')
+  chatLogEl.scrollTop = chatLogEl.scrollHeight
+}
 function logChat(name, text) { chatLogArr.push({ name, text }); if (chatLogArr.length > 80) chatLogArr.shift(); renderChatLog() }
 
 export function doSay(text) {
@@ -32,21 +39,23 @@ export function onChat(peerId, d) {
 
 export function setMyName(n) {
   state.myName = String(n).slice(0, 24) || state.myName
-  state.me.tag.userData.draw(state.myName)
-  // mirrors main.js's boot-time hint text (touch vs desktop instructions) so a
-  // rename doesn't revert a touch device's hint back to desktop-only copy
-  document.querySelector('.hint').innerHTML = 'you are <b style="color:#ffd39b">' + esc(state.myName) + '</b> &nbsp;·&nbsp; ' +
-    (isTouchDevice ? 'joystick to walk · buttons to hop/pet/wave · drag to look' : 'WASD walk · Space hop · E pet · Q wave · drag to look · gamepad works')
+  state.me.tag.userData.draw(state.myName, myTitle())
+  refreshHint()
   if (net.sendHello) net.sendHello({ seed: state.mySeed, n: state.myName, x: state.me.pos.x, z: state.me.pos.z, h: state.me.heading })
 }
 
 // human chat input: Enter focuses it, then Enter sends
+document.getElementById('chat-form').addEventListener('submit', e => {
+  e.preventDefault()
+  const v = chatInput.value.trim(); if (v) doSay(v)
+  chatInput.value = ''; chatInput.blur()
+})
 chatInput.addEventListener('keydown', e => {
   e.stopPropagation()
-  if (e.key === 'Enter') { const v = chatInput.value.trim(); if (v) doSay(v); chatInput.value = ''; chatInput.blur() }
+  if (e.key === 'Enter') { e.preventDefault(); document.getElementById('chat-form').requestSubmit() }
   else if (e.key === 'Escape') { chatInput.value = ''; chatInput.blur() }
 })
-addEventListener('keydown', e => { if (e.key === 'Enter' && document.activeElement !== chatInput) { e.preventDefault(); chatInput.focus() } })
+addEventListener('keydown', e => { if (e.key === 'Enter' && !/INPUT|TEXTAREA|BUTTON|SELECT/.test(document.activeElement?.tagName || '')) { e.preventDefault(); chatInput.focus() } })
 
 // the control API a headless bot drives its critter through (moveTo/follow feed
 // the local critter's target; manual WASD input overrides)
@@ -67,4 +76,11 @@ window.campfire = {
   wave() { doWave() },
   // camera zoom (additive surface): set distance (clamped 6..18) or read it back
   zoom(d) { return d == null ? getZoom() : setZoom(d) },
+  // v1.3 expression gear (additive): hat(-1..HAT_COUNT-1) or read back, ride() toggle
+  hat(id) {
+    if (id != null) { ownHat(+id); setHat(state.me, id); saveIdentity(state.mySeed, state.myName, state.me.hatId) }
+    return { id: state.me.hatId ?? -1, name: HAT_NAMES[state.me.hatId] || null, count: HAT_COUNT }
+  },
+  ride() { doRide(); return !!state.me.riding },
+  fish() { doFish() },
 }

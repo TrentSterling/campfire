@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "converged": true,
+  "seated": true,
+  "released": true,
+  "migrated": true,
+  "moved": true,
+  "aErrors": [],
+  "bErrors": []
+}

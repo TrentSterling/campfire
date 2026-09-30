@@ -16,6 +16,8 @@ import { scene, camera, CURVE, curve, GY, MAX_R, FIRE_R, clampIsland, makeShadow
 import { critters } from '../state.js'
 import { genRecipe, CRITTER_ARCHES } from './recipes.js'
 import { playChirp, spawnDust } from '../audio.js'
+import { gearDispose, boardScale, boardBank, boardClearance } from './gear.js'
+import { resolveObstacles, walkPath, nearestWalkable } from '../world/obstacles.js'
 
 // ---------- eye assets (OG: separate googly meshes projected onto the live SDF) ----------
 const eyeGeo = new THREE.SphereGeometry(1, 14, 11)
@@ -39,6 +41,7 @@ export class Critter {
     this.yawQuat = new THREE.Quaternion()
     this.target = null
     this.vignette = null
+    this.seatPose = false             // remote NPC seating, separate from director ownership
     this.napping = false
     this.wanderEnabled = false        // campfire: NPCs only; players/peers steer via input/target
     this.lookDir = new THREE.Vector3(Math.sin(heading), 0, Math.cos(heading))
@@ -308,6 +311,7 @@ export class Critter {
     // per-prim spheres sized by bind radii, manually merged INDEXED (no addons dep)
     const geos = []
     for (let i = 0; i < n; i++) {
+      if (this.prims[i].colorOnly) continue
       const r = Math.max(this.fA[i * 4 + 3], this.fB[i * 4 + 3])
       const dx = this.fB[i * 4] - this.fA[i * 4], dy = this.fB[i * 4 + 1] - this.fA[i * 4 + 1], dz = this.fB[i * 4 + 2] - this.fA[i * 4 + 2]
       const len = Math.sqrt(dx * dx + dy * dy + dz * dz)
@@ -405,7 +409,7 @@ export class Critter {
     out.set(local.x * sxz, (local.y + lift) * sy, local.z * sxz)
     out.applyQuaternion(this.quat)
     out.x += this.pos.x; out.z += this.pos.z
-    out.y += GY + this.airY
+    out.y += GY + this.airY + (this.poseLift || 0)
     return out
   }
 
@@ -482,10 +486,28 @@ export class Critter {
       // keep playing through those so paired critters don't look like statues
       if (!this.napping && !this.controlled && this.vignette !== 'nap' && this.speedN < 0.12) this.quirk()
     }
-    if (this.arch === 'hopper') this.updateHopper(dt)
+    // NPCs follow furniture-safe waypoints, including after a seated vignette.
+    // A seated pose alone grants collision permission, never the approach walk.
+    if(this.wanderEnabled && this.target && !this.seated) {
+      if(this.__routePoint!==this.target) {
+        const r=Math.min(.36,Math.max(.18,this.bodyR*.55))
+        const path=walkPath(this.pos,this.target,r)
+        this.__route=path || [];this.target=this.__route.shift() || null;this.__routePoint=this.target
+      }
+    } else if(!this.target && this.__route?.length && this.wanderEnabled) {
+      this.target=this.__route.shift();this.__routePoint=this.target
+    }
+    if(!this.wanderEnabled || this.controlled || this.seated){this.__route=null;this.__routePoint=null}
+    if(this.seated) {
+      this.vel.set(0,0,0);this.airY=0;this.speedN=0;this.target=null;this.wantJump=false;this.lift=0;this.pitch=0;this.roll=0
+      E1.set(0,this.heading,0,'YXZ');this.quat.setFromEuler(E1);this.yawQuat.copy(this.quat)
+    }
+    else if (this.riding && this.arch === 'hopper') this.updateWalker(dt)
+    else if (this.arch === 'hopper') this.updateHopper(dt)
     else if (this.arch === 'flyer') this.updateFlyer(dt)
     else if (this.arch === 'serpent') this.updateSerpent(dt)
     else this.updateWalker(dt)
+    if(!this.seated)resolveObstacles(this.pos,Math.min(.36,Math.max(.18,this.bodyR*.55)),this.airY)
     // wave emote: quick heading wiggle layered onto the pose
     if (this.waveT >= 0) {
       this.waveT += dt / 0.8
@@ -498,6 +520,19 @@ export class Critter {
         this.yawQuat.multiply(Q1)
       }
     }
+    this.poseLift = this.riding ? .17 * boardScale(this) + boardClearance(this) : this.seated ? .58 : 0
+    if(this.riding) {
+      this.lift = -.035*this.size;this.pitch=-.05;this.roll=-boardBank(this)
+      E1.set(this.pitch,this.heading,this.roll,'YXZ');this.quat.setFromEuler(E1)
+      E1.set(0,this.heading,0,'YXZ');this.yawQuat.setFromEuler(E1)
+      const scale=boardScale(this)
+      E1.set(boardBank(this),this.heading+Math.PI/2,0,'YXZ')
+      for(const leg of this.legs || []) {
+        V[2].set(-clamp(leg.restLocal.z,-.35*scale,.35*scale),.155*scale,leg.side*.11*scale).applyEuler(E1)
+        leg.pos.set(this.pos.x+V[2].x,GY+this.airY+boardClearance(this)+V[2].y,this.pos.z+V[2].z)
+        leg.planted.copy(leg.pos);leg.swingT=-1;leg.wasAirborne=true
+      }
+    }
     this.updateFrame(dt, false)
     this.updateEyes(dt)
     // blob shadow
@@ -505,12 +540,13 @@ export class Critter {
     const shrink = 1 / (1 + this.airY * 0.8)
     this.shadow.scale.setScalar(this.bodyR * 3.0 * shrink * (0.9 + 0.1 * this.squash))
     this.shadow.material.opacity = 0.3 * shrink
-    this.geo.boundingSphere.center.set(this.pos.x, GY + this.airY + this.bodyY, this.pos.z)
+    this.geo.boundingSphere.center.set(this.pos.x, GY + this.airY + this.bodyY + (this.poseLift || 0), this.pos.z)
   }
 
   // OG seekTarget: controlled -> input drives desired velocity; target -> walk to it.
   // maxR leash = island edge; the firepit repels via clampIsland.
   seekTarget(dt, maxSpeed, accel, maxR = MAX_R) {
+    maxSpeed *= this.speedMul || 1   // gear hook: skateboard boost (src/critter/gear.js)
     let desiredX = 0, desiredZ = 0
     if (this.controlled) {
       desiredX = this.input.x * maxSpeed
@@ -538,7 +574,7 @@ export class Critter {
       const want = Math.atan2(this.vel.x, this.vel.z)
       const prev = this.heading
       this.heading = angleLerp(this.heading, want, Math.min(1, 7 * dt))
-      this.headingVel = (this.heading - prev) / Math.max(dt, 1e-4)
+      this.headingVel = angleDiff(this.heading,prev) / Math.max(dt, 1e-4)
     } else this.headingVel *= 1 - 6 * dt
     return speed
   }
@@ -592,7 +628,7 @@ export class Critter {
   updateWalker(dt) {
     if (!this.controlled && this.wanderEnabled) this.wander(dt)
     const R = this.recipe
-    const maxSpeed = R.motion.speed * this.size
+    const maxSpeed = (R.motion.speed || R.motion.hopLen*1.8 || 1.5) * this.size
     this.seekTarget(dt, maxSpeed, 5)
 
     // jump: a little ballistic bunny-hop with squash kicks (Space / pad A / remote 'hop' act)
@@ -640,6 +676,15 @@ export class Critter {
     // feet: plant-and-step state machine with predictive landing
     const swingFrac = 0.38
     for (const leg of this.legs) {
+      if(this.seated) {
+        V[2].set(leg.side*.18*this.size,-.15,Math.max(.22,Math.abs(leg.restLocal.z))*.65)
+        V[2].applyQuaternion(this.yawQuat)
+        leg.pos.set(this.pos.x+V[2].x,GY+.48+V[2].y,this.pos.z+V[2].z)
+        leg.planted.copy(leg.pos);leg.swingT=-1;leg.wasAirborne=true;continue
+      }
+      if(this.riding) {
+        continue
+      }
       // rest position (world, ground)
       V[2].copy(leg.restLocal).applyQuaternion(this.yawQuat)
       const rx = this.pos.x + V[2].x + this.vel.x * 0.13
@@ -956,7 +1001,13 @@ export class Critter {
         const raise = this.headLift * Math.pow(Math.max(0, 1 - s / 2.6), 1.5)
         c.wx = c.pos.x + px * sway * Math.min(1, 0.25 + s / 2.6) // sway eases in past the raised neck
         c.wz = c.pos.z + pz * sway * Math.min(1, 0.25 + s / 2.6)
-        c.wy = GY + c.r * 0.92 * rB * this.squash + lift + this.lift * 0.4 + raise
+        c.wy = GY + (this.poseLift || 0) + c.r * 0.92 * rB * this.squash + lift + this.lift * 0.4 + raise
+        if(this.riding || this.seated) {
+          const scale=this.riding?boardScale(this):1.5,t=s/n
+          const localX=Math.sin(t*Math.PI*2)*.09*scale,localZ=(.32-t*.70)*scale
+          c.wx=this.pos.x+Math.cos(this.heading)*localX+Math.sin(this.heading)*localZ
+          c.wz=this.pos.z-Math.sin(this.heading)*localX+Math.cos(this.heading)*localZ
+        }
       }
       for (let s = 0; s < n; s++) {
         const a = this.chain[s], b = this.chain[s + 1]
@@ -1075,7 +1126,9 @@ export class Critter {
         this.toWorld(V[4], d.a, this.lift)
         this.toWorld(V[5], d.b, this.lift)
       }
-      this.setPrim(d.i, V[4], V[5], d.r1 * rB, d.r2 * rB)
+      if((this.hatPreviewId??this.hatId)>=0 && (d.frame==='head' || d.a.y>this.bodyY+this.bodyR*.65))
+        this.setPrim(d.i,this.headPos,this.headPos,.00001,.00001)
+      else this.setPrim(d.i, V[4], V[5], d.r1 * rB, d.r2 * rB)
     }
 
     // propeller (flyers): mast up from the crown, hub, 3 spinning blades
@@ -1095,6 +1148,9 @@ export class Critter {
         V[11].copy(V[7]).addScaledVector(V[9], p.bladeLen)
         this.setPrim(p.blades[i], V[10], V[11], p.bladeR1, p.bladeR2)
       }
+      // A worn hat takes the flyer's crown socket. Its propeller returns when
+      // the hat is removed, rather than passing through the brim.
+      if((this.hatPreviewId??this.hatId)>=0)for(const i of [p.iMast,p.iHub,...p.blades])this.setPrim(i,this.headPos,this.headPos,.00001,.00001)
     }
 
     // spots (embedded surface dots)
@@ -1181,6 +1237,7 @@ export class Critter {
   }
 
   dispose() {
+    gearDispose(this)   // hats/boards live in the scene, not this.group
     scene.remove(this.group)
     this.geo.dispose()
     this.matBody.dispose()

@@ -1,0 +1,96 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900,
+      "layout": {
+        "offscreen": [],
+        "overlaps": [],
+        "frames": 140,
+        "canvas": [
+          1440,
+          900
+        ],
+        "touch": false
+      }
+    },
+    {
+      "name": "laptop",
+      "width": 1280,
+      "height": 720,
+      "layout": {
+        "offscreen": [],
+        "overlaps": [],
+        "frames": 153,
+        "canvas": [
+          1280,
+          720
+        ],
+        "touch": false
+      }
+    },
+    {
+      "name": "tablet",
+      "width": 768,
+      "height": 1024,
+      "layout": {
+        "offscreen": [],
+        "overlaps": [],
+        "frames": 152,
+        "canvas": [
+          768,
+          1024
+        ],
+        "touch": true
+      }
+    },
+    {
+      "name": "phone",
+      "width": 390,
+      "height": 844,
+      "layout": {
+        "offscreen": [],
+        "overlaps": [],
+        "frames": 153,
+        "canvas": [
+          390,
+          844
+        ],
+        "touch": true
+      }
+    },
+    {
+      "name": "small-phone",
+      "width": 360,
+      "height": 740,
+      "layout": {
+        "offscreen": [],
+        "overlaps": [],
+        "frames": 154,
+        "canvas": [
+          360,
+          740
+        ],
+        "touch": true
+      }
+    },
+    {
+      "name": "landscape",
+      "width": 844,
+      "height": 390,
+      "layout": {
+        "offscreen": [],
+        "overlaps": [],
+        "frames": 153,
+        "canvas": [
+          844,
+          390
+        ],
+        "touch": true
+      }
+    }
+  ],
+  "errors": []
+}

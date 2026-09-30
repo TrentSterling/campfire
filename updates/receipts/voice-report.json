@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "audible": {
+    "joined": true,
+    "pending": false,
+    "muted": false,
+    "deafened": false,
+    "mode": "open",
+    "held": false,
+    "transmitting": true,
+    "localLevel": 0.000019281154750165316,
+    "context": "running",
+    "tracks": [
+      {
+        "enabled": true,
+        "readyState": "live"
+      }
+    ],
+    "remotes": [
+      {
+        "id": "bIMxNGDUVQL4Htl9X933",
+        "level": 0.11397899824113183,
+        "gain": 1,
+        "outputGain": 1,
+        "muted": false,
+        "panner": [
+          0.4618068039417267,
+          7.244664192199707
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "bytes": 1699,
+      "packets": 23,
+      "codec": "CIT01_111_minptime=10;useinbandfec=1"
+    }
+  ],
+  "errors": []
+}

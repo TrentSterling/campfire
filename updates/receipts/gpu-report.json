@@ -1,0 +1,336 @@
+{
+  "passed": true,
+  "gpu": {
+    "backend": "webgpu",
+    "glyphsDrawn": 326,
+    "panelsDrawn": 3,
+    "atlasGlyphs": 160,
+    "atlasBytes": 4194304,
+    "drawCalls": 2,
+    "adapter": "nvidia",
+    "mode": "instanced-sdf",
+    "uiGlyphs": 270,
+    "labels": [
+      {
+        "x": 619.6618313954406,
+        "y": 361.23038683026175,
+        "w": 83.21998977661133,
+        "h": 34,
+        "kind": "name",
+        "text": "Fuzzy Loaf",
+        "id": 2,
+        "lines": 1
+      },
+      {
+        "x": 250.15420350075448,
+        "y": 402.7243973830358,
+        "w": 93.51597595214844,
+        "h": 34,
+        "kind": "name",
+        "text": "Sleepy Bean",
+        "id": 3,
+        "lines": 1
+      },
+      {
+        "x": 8,
+        "y": 355.20875073743645,
+        "w": 86.11198806762695,
+        "h": 34,
+        "kind": "name",
+        "text": "Mossy Puff",
+        "id": 1,
+        "lines": 1
+      }
+    ],
+    "font": "Nunito",
+    "canvasTexturesForText": 0
+  },
+  "pixels": {
+    "backend": "webgpu",
+    "titlePixels": 3125,
+    "antialiasPixels": 17917,
+    "total": 21226
+  },
+  "settings": {
+    "ambience": 0,
+    "effects": 0.4,
+    "voice": 0.6,
+    "quality": "low",
+    "particles": false,
+    "names": true
+  },
+  "mix": {
+    "ambience": 0,
+    "effects": 0.4000000059604645,
+    "muted": false
+  },
+  "resources": {
+    "start": 329,
+    "hats": 329,
+    "fishingStart": 329,
+    "fishingEnd": 329
+  },
+  "hatSamples": 768,
+  "results": [
+    {
+      "w": 1280,
+      "h": 720,
+      "dpr": 1,
+      "gpu": {
+        "backend": "webgpu",
+        "glyphsDrawn": 405,
+        "panelsDrawn": 8,
+        "atlasGlyphs": 168,
+        "atlasBytes": 4194304,
+        "drawCalls": 2,
+        "adapter": "nvidia",
+        "mode": "instanced-sdf",
+        "uiGlyphs": 316,
+        "labels": [
+          {
+            "x": 352.30021744739133,
+            "y": 205.13821272030395,
+            "w": 93.51597595214844,
+            "h": 34,
+            "kind": "name",
+            "text": "Sleepy Bean",
+            "id": 3,
+            "lines": 1
+          },
+          {
+            "x": 367.79501100434425,
+            "y": 161.89685386903395,
+            "w": 83.21998977661133,
+            "h": 34,
+            "kind": "name",
+            "text": "Fuzzy Loaf",
+            "id": 2,
+            "lines": 1
+          },
+          {
+            "x": 658.6123656745544,
+            "y": 171.83097287382748,
+            "w": 73.87198257446289,
+            "h": 34,
+            "kind": "name",
+            "text": "multiped",
+            "id": 7,
+            "lines": 1
+          },
+          {
+            "x": 513.5543597969399,
+            "y": 155.76680607869625,
+            "w": 55.16398620605469,
+            "h": 34,
+            "kind": "name",
+            "text": "biped",
+            "id": 5,
+            "lines": 1
+          },
+          {
+            "x": 428.75344553401476,
+            "y": 105.57291800355873,
+            "w": 84.46797943115234,
+            "h": 34,
+            "kind": "name",
+            "text": "quadruped",
+            "id": 4,
+            "lines": 1
+          },
+          {
+            "x": 710.8384925569762,
+            "y": 118.82309328990914,
+            "w": 63.53998565673828,
+            "h": 34,
+            "kind": "name",
+            "text": "hopper",
+            "id": 6,
+            "lines": 1
+          },
+          {
+            "x": 514.4771115295837,
+            "y": 56.46054596549314,
+            "w": 86.11198806762695,
+            "h": 34,
+            "kind": "name",
+            "text": "Mossy Puff",
+            "id": 1,
+            "lines": 1
+          },
+          {
+            "x": 805.8602290831952,
+            "y": 117.3851580322135,
+            "w": 50,
+            "h": 34,
+            "kind": "name",
+            "text": "flyer",
+            "id": 9,
+            "lines": 1
+          }
+        ],
+        "font": "Nunito",
+        "canvasTexturesForText": 0
+      }
+    },
+    {
+      "w": 390,
+      "h": 844,
+      "dpr": 2,
+      "gpu": {
+        "backend": "webgpu",
+        "glyphsDrawn": 240,
+        "panelsDrawn": 2,
+        "atlasGlyphs": 168,
+        "atlasBytes": 4194304,
+        "drawCalls": 2,
+        "adapter": "nvidia",
+        "mode": "instanced-sdf",
+        "uiGlyphs": 199,
+        "labels": [
+          {
+            "x": 219.43632669533235,
+            "y": 59.109863730410495,
+            "w": 69.71598402659097,
+            "h": 34,
+            "kind": "name",
+            "text": "multiped",
+            "id": 7,
+            "lines": 1
+          },
+          {
+            "x": 332,
+            "y": 57.50500195925811,
+            "w": 50,
+            "h": 34,
+            "kind": "name",
+            "text": "flyer",
+            "id": 9,
+            "lines": 1
+          }
+        ],
+        "font": "Nunito",
+        "canvasTexturesForText": 0
+      }
+    },
+    {
+      "w": 360,
+      "h": 740,
+      "dpr": 2,
+      "gpu": {
+        "backend": "webgpu",
+        "glyphsDrawn": 228,
+        "panelsDrawn": 0,
+        "atlasGlyphs": 168,
+        "atlasBytes": 4194304,
+        "drawCalls": 1,
+        "adapter": "nvidia",
+        "mode": "instanced-sdf",
+        "uiGlyphs": 199,
+        "labels": [],
+        "font": "Nunito",
+        "canvasTexturesForText": 0
+      }
+    },
+    {
+      "w": 1440,
+      "h": 900,
+      "dpr": 2,
+      "gpu": {
+        "backend": "webgpu",
+        "glyphsDrawn": 405,
+        "panelsDrawn": 8,
+        "atlasGlyphs": 168,
+        "atlasBytes": 4194304,
+        "drawCalls": 2,
+        "adapter": "nvidia",
+        "mode": "instanced-sdf",
+        "uiGlyphs": 316,
+        "labels": [
+          {
+            "x": 382.5229417051079,
+            "y": 254.62210296611102,
+            "w": 83.21998977661133,
+            "h": 34,
+            "kind": "name",
+            "text": "Fuzzy Loaf",
+            "id": 2,
+            "lines": 1
+          },
+          {
+            "x": 359.63169371696165,
+            "y": 207.5100832305032,
+            "w": 93.51597595214844,
+            "h": 34,
+            "kind": "name",
+            "text": "Sleepy Bean",
+            "id": 3,
+            "lines": 1
+          },
+          {
+            "x": 751.6475331170493,
+            "y": 226.4496229838012,
+            "w": 73.87198257446289,
+            "h": 34,
+            "kind": "name",
+            "text": "multiped",
+            "id": 7,
+            "lines": 1
+          },
+          {
+            "x": 570.3646376705707,
+            "y": 206.76898023944216,
+            "w": 55.16398620605469,
+            "h": 34,
+            "kind": "name",
+            "text": "biped",
+            "id": 5,
+            "lines": 1
+          },
+          {
+            "x": 469.02090136864155,
+            "y": 193.9698632244092,
+            "w": 84.46797943115234,
+            "h": 34,
+            "kind": "name",
+            "text": "quadruped",
+            "id": 4,
+            "lines": 1
+          },
+          {
+            "x": 815.1559600022792,
+            "y": 182.88085612194806,
+            "w": 63.53998565673828,
+            "h": 34,
+            "kind": "name",
+            "text": "hopper",
+            "id": 6,
+            "lines": 1
+          },
+          {
+            "x": 575.029378344196,
+            "y": 157.87130476722464,
+            "w": 86.11198806762695,
+            "h": 34,
+            "kind": "name",
+            "text": "Mossy Puff",
+            "id": 1,
+            "lines": 1
+          },
+          {
+            "x": 931.4401140472107,
+            "y": 155.73252436087589,
+            "w": 50,
+            "h": 34,
+            "kind": "name",
+            "text": "flyer",
+            "id": 9,
+            "lines": 1
+          }
+        ],
+        "font": "Nunito",
+        "canvasTexturesForText": 0
+      }
+    }
+  ],
+  "errors": []
+}

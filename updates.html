@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f0e7">
+  <meta name="description" content="A visual tour of the Campfire polish pass: the campsite, every model, hats that fit, GPU glyphs, P2P voice and honest playtest findings.">
+  <title>Campfire updates | Back to the fire</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="updates/style.css">
+  <script type="module" src="updates/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to the review</a>
+  <header class="masthead">
+    <a class="brand" href="#main" aria-label="Campfire updates, top of page"><img src="favicon.svg" width="38" height="38" alt="Campfire flame"><span>campfire<span class="brand-dot">.</span></span></a>
+    <nav aria-label="Review sections"><a href="#fixes">Latest fixes</a><a href="#models">Models</a><a href="#hats">Hats</a><a href="#changes">Voice &amp; text</a><a href="#checks">Playtest</a></nav>
+    <a class="play-link" href="./" target="_blank" rel="noopener">Open the game <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-top">
+        <div><p class="eyebrow"><span class="little-flame" aria-hidden="true">✦</span> The v1.8 playtest fixes</p><h1 id="hero-title">Back to <em>the fire.</em></h1></div>
+        <p class="hero-intro">One place for the menus. Actual WebGPU glyphs. Better skating, fishing and little friends. Your playtest notes, turned into changes you can see.</p>
+      </div>
+      <figure class="hero-image"><a href="updates/media/art-polished.png" target="_blank" rel="noopener" aria-label="Open the full-resolution campsite screenshot"><img src="updates/media/art-polished.png" width="1440" height="900" fetchpriority="high" alt="The updated Campfire clearing, with sculpted firs, warm lanterns, timber benches, a bright fire and pastel creatures"></a><figcaption><span><i aria-hidden="true"></i> Captured from the actual build</span><span>Art, glyphs &amp; P2P voice <span aria-hidden="true">↗</span></span></figcaption></figure>
+      <dl class="numbers"><div><dt>Model variants reviewed</dt><dd>58</dd></div><div><dt>Views captured</dt><dd>222</dd></div><div><dt>Hat / creature combinations</dt><dd>48</dd></div><div><dt>Application errors in the gauntlet</dt><dd>0</dd></div></dl>
+    </section>
+
+    <section id="fixes" class="wrap section" aria-labelledby="fixes-title">
+      <div class="section-heading"><div><p class="eyebrow">New / From your playtest</p><h2 id="fixes-title">One UI.<br><em>Better manners.</em></h2></div><p>Controls, Settings, Journal and Hats share one drawer. Chat lives with voice. Hat previews show the actual models, and the purchase stays within reach.</p></div>
+      <figure class="fix-main"><a href="updates/media/ui-drawer.png" target="_blank" rel="noopener"><img src="updates/media/ui-drawer.png" width="1440" height="900" loading="lazy" alt="The unified Campfire drawer showing eight photographed hat choices and the purchase footer"></a><figcaption>The actual game, with the new hat drawer open. Click any capture for the full image.</figcaption></figure>
+      <div class="fix-list">
+        <article><span>01</span><div><h3>Native WebGPU text.</h3><p>WGSL glyph and panel pipelines, verified with GPU pixel readback in Chrome and Firefox. Game labels resist selection; text fields keep editing and IME.</p></div></article>
+        <article><span>02</span><div><h3>Controls you can find.</h3><p>The header says Controls, with H as the shortcut. Right-click stays in the game. A single drawer handles every menu section.</p></div></article>
+        <article><span>03</span><div><h3>Feet stay on the deck.</h3><p>All six creature families ride with a dedicated stance. Turns keep the board above ground; walking IK no longer pulls a foot off the skateboard.</p></div></article>
+        <article><span>04</span><div><h3>A line above the bank.</h3><p>The fishing line connects to the actual rod tip and follows a smooth curve above the grass ledge and sand. Eight cast directions passed.</p></div></article>
+        <article><span>05</span><div><h3>Walk around the furniture.</h3><p>Activities choose reachable approaches. Ninety-six routes crossed the island or reached the fire and hat rack without a blocked path.</p></div></article>
+        <article><span>06</span><div><h3>Sit, then go wandering.</h3><p>Companions perch on the benches, leave their seats and resume walking. Their poses and keeper migration passed a real two-peer check.</p></div></article>
+        <article><span>07</span><div><h3>Light where the bulb is.</h3><p>Lantern and string-light glows now follow the same world curvature as their fixtures. The displaced halos are gone.</p></div></article>
+        <article><span>08</span><div><h3>A phone with the right proportions.</h3><p>The old review image was stretched by CSS. Its aspect ratio is corrected, and the drawer fits phone, tablet and landscape viewports.</p></div></article>
+      </div>
+      <div class="fix-gallery"><figure><a href="updates/media/skate-poses.png" target="_blank" rel="noopener"><img src="updates/media/skate-poses.png" width="1440" height="900" loading="lazy" alt="Six creature families on their skateboards in the Campfire clearing"></a><figcaption>Six staged production poses, with feet anchored to the deck.</figcaption></figure><figure><a href="updates/media/fishing-line.png" target="_blank" rel="noopener"><img src="updates/media/fishing-line.png" width="1440" height="900" loading="lazy" alt="A shoreline fishing cast with a smooth line clearing the bank"></a><figcaption>A real cast, with the bank clearance fixed.</figcaption></figure></div>
+      <p class="fine-print">Recorded evidence: <a href="updates/receipts/fixes-report.json" target="_blank" rel="noopener">reported fixes</a> · <a href="updates/receipts/firefox-report.json" target="_blank" rel="noopener">Firefox WebGPU</a> · <a href="updates/receipts/npcsync-report.json" target="_blank" rel="noopener">NPC seating and migration</a>.</p>
+    </section>
+
+    <section id="models" class="wrap section" aria-labelledby="models-title">
+      <div class="section-heading"><div><p class="eyebrow">01 / Look closer</p><h2 id="models-title">Small things.<br><em>Much more character.</em></h2></div><p>Pick a model, choose an angle, and drag the divider. These are real before and after renders under the same review lighting.</p></div>
+      <div class="category-bar" role="group" aria-label="Model categories"></div>
+      <div class="inspector">
+        <aside class="model-sidebar" aria-label="Choose a model"><div class="sidebar-heading"><span id="category-name">Hats</span><span id="model-count"></span></div><div id="model-list" class="model-list"></div></aside>
+        <div class="model-stage">
+          <div class="stage-toolbar"><h3 id="model-name">Wizard hat</h3><div class="angles" role="group" aria-label="Viewing angle"><button type="button" data-angle="front" aria-pressed="true">Front</button><button type="button" data-angle="side" aria-pressed="false">Side</button><button type="button" data-angle="back" aria-pressed="false">Back</button></div></div>
+          <div class="compare" id="compare">
+            <img id="before-image" width="800" height="600" alt="Model before the polish pass">
+            <img id="after-image" width="800" height="600" alt="Model after the polish pass">
+            <span class="compare-label label-before">Before</span><span class="compare-label label-after">After</span>
+            <div class="divider" aria-hidden="true"><span>‹ ›</span></div>
+            <input id="comparison-range" type="range" min="0" max="100" value="50" aria-label="Before and after divider; use arrow keys to move">
+            <p id="image-error" hidden></p>
+          </div>
+          <div class="compare-footer"><span id="compare-hint">Drag to compare · Arrow keys work too</span><a id="full-model" href="updates/media/model-final-hat-2-front.png" target="_blank" rel="noopener">Full image ↗</a></div>
+          <div class="model-note"><div class="score"><strong id="model-score">8.7</strong><span>/ 10</span></div><div><p class="note-label" id="model-rank">Our visual pick #1 in hats</p><p id="model-note">Bent silhouette, rolled brim and attached stars.</p></div></div>
+        </div>
+      </div>
+      <p class="fine-print">Scores are subjective art judgments: silhouette, construction, detail at play distance and fit with the campsite. Technical checks are listed separately below.</p>
+    </section>
+
+    <section id="hats" class="wrap section" aria-labelledby="hats-title">
+      <div class="section-heading"><div><p class="eyebrow">02 / Yes, on the head</p><h2 id="hats-title">Eight hats.<br><em>Six kinds of little friend.</em></h2></div><div><p>They follow the animated head skin through turns, squash and jumps. Ears and propellers make room; the halo keeps its little float.</p><label class="family-select">See them on <select id="hat-family"><option value="hopper">Hopper</option><option value="quadruped">Quadruped</option><option value="biped">Biped</option><option value="multiped">Multiped</option><option value="serpent">Serpent</option><option value="flyer">Flyer</option></select></label></div></div>
+      <div id="hat-gallery" class="hat-gallery"></div>
+      <p class="fine-print">48 photographed combinations. 768 animated attachment samples passed the separate GPU check. Click a hat to inspect its construction above.</p>
+    </section>
+
+    <section id="changes" class="wrap section" aria-labelledby="changes-title">
+      <div class="section-heading"><div><p class="eyebrow">03 / Beyond the art</p><h2 id="changes-title">A nicer place<br><em>to actually hang out.</em></h2></div><p>The polish also reached the text, sound and little interactions that kept getting in the way.</p></div>
+      <div class="change-story">
+        <figure class="glyph-image"><img src="updates/media/gpu-long-message.png" width="1440" height="900" loading="lazy" alt="Campfire with a long speech bubble wrapping across multiple lines in GPU-rendered text"><figcaption>Full messages wrap. Names make room for each other.</figcaption></figure>
+        <div class="story-copy"><span class="story-number">a.</span><h3>Text with a proper place in the scene.</h3><p>The HUD, chat, editing overlay, names and speech render through native WebGPU WGSL pipelines and a shared SDF atlas. Native controls keep keyboard editing, IME and accessibility. The world renderer remains WebGL.</p><dl class="small-numbers"><div><dt>Glyph + panel draws</dt><dd>2</dd></div><div><dt>Canvas label textures</dt><dd>0</dd></div></dl><p class="limitation">Still rough: world labels do not sample scene depth, and complex scripts need a shaping engine.</p></div>
+      </div>
+      <div class="voice-story"><div><span class="story-number">b.</span><h3>Voices around the same fire.</h3><p>Opt-in voice travels over the existing P2P connections. Distance and direction shape playback, with mute, deafen, per-peer mute and push-to-talk.</p></div><div class="voice-proof"><p class="note-label">Recorded WebRTC check</p><p class="voice-result"><span aria-hidden="true">✓</span> Remote microphone audio received</p><dl><div><dt>RTP packets</dt><dd id="rtp-packets">23</dd></div><div><dt>Received bytes</dt><dd id="rtp-bytes">1,667</dd></div></dl><p>Late join, departure, rejoin and actual microphone teardown also passed.</p></div></div>
+      <div class="interaction-story"><div class="interaction-list"><span class="story-number">c.</span><h3>Fewer little annoyances.</h3><article><span>01</span><div><h4>Trying on is free.</h4><p>Preview locally, see the price, then choose Buy and wear. Browsing no longer spends your shells.</p></div></article><article><span>02</span><div><h4>The scenery has a footprint.</h4><p>Benches, trunks, rocks and posts block walking. Activity routes find a way around them. All 53 footprints passed.</p></div></article><article><span>03</span><div><h4>A little more room on a little screen.</h4><p>Phone conversation collapses until you need it. Clear play space went from 242 to 311 pixels at 360 × 740.</p></div></article></div><figure class="phone-image"><img src="updates/media/visual-small-phone.png" width="360" height="740" loading="lazy" alt="The updated small-phone layout with collapsed conversation, voice controls and touch movement"><figcaption>360 × 740 viewport with touch emulation; original aspect ratio</figcaption></figure></div>
+    </section>
+
+    <section id="checks" class="checks-section" aria-labelledby="checks-title"><div class="wrap">
+      <div class="section-heading"><div><p class="eyebrow">04 / Played, measured, judged</p><h2 id="checks-title">The checks passed.<br><em>The critique stays honest.</em></h2></div><p>These are recorded results from the local gauntlet, not a live service status. The art scores above are a separate human-style judgment.</p></div>
+      <div class="review-columns"><div><h3>What passed</h3><ul class="check-list"><li><span aria-hidden="true">✓</span><div><strong>Production models</strong><p>58 variants, 222 views, finite walking geometry and eyes.</p></div><a href="updates/receipts/models-final-report.json" target="_blank" rel="noopener" aria-label="Read model test receipt">↗</a></li><li><span aria-hidden="true">✓</span><div><strong>Visual layouts</strong><p>Six viewports, touch controls, chat, rename and microphone denial.</p></div><a href="updates/receipts/visual-gauntlet.json" target="_blank" rel="noopener" aria-label="Read visual test receipt">↗</a></li><li><span aria-hidden="true">✓</span><div><strong>GPU text, hats &amp; settings</strong><p>Pixel readback, 768 hat samples and stable resource counts.</p></div><a href="updates/receipts/gpu-report.json" target="_blank" rel="noopener" aria-label="Read GPU test receipt">↗</a></li><li><span aria-hidden="true">✓</span><div><strong>P2P voice</strong><p>Received waveform, RTP, mute, deafen, PTT and stream lifecycle.</p></div><a href="updates/receipts/voice-report.json" target="_blank" rel="noopener" aria-label="Read voice test receipt">↗</a></li><li><span aria-hidden="true">✓</span><div><strong>Two-peer gameplay</strong><p>Fishing, rewards, explicit hat purchases and activity navigation.</p></div><a href="updates/receipts/play-report.json" target="_blank" rel="noopener" aria-label="Read gameplay test receipt">↗</a></li><li><span aria-hidden="true">✓</span><div><strong>Prop collision &amp; phone space</strong><p>53 solid footprints, camera extremes and the collapsed chat layout.</p></div><a href="updates/receipts/art-playtest-report.json" target="_blank" rel="noopener" aria-label="Read art playtest receipt">↗</a></li><li><span aria-hidden="true">&#10003;</span><div><strong>Your reported fixes</strong><p>96 routes, six skating families, eight casts, menu and browser behavior.</p></div><a href="updates/receipts/fixes-report.json" target="_blank" rel="noopener" aria-label="Read reported fixes receipt">&#8599;</a></li><li><span aria-hidden="true">&#10003;</span><div><strong>Firefox native WebGPU</strong><p>Real glyph pixel readback, physical H key and phone DPR 2.</p></div><a href="updates/receipts/firefox-report.json" target="_blank" rel="noopener" aria-label="Read Firefox WebGPU receipt">&#8599;</a></li><li><span aria-hidden="true">&#10003;</span><div><strong>NPC seating and migration</strong><p>Two peers agree on the perch, seat release and resumed wandering.</p></div><a href="updates/receipts/npcsync-report.json" target="_blank" rel="noopener" aria-label="Read NPC sync receipt">&#8599;</a></li></ul><p class="fine-print">Firefox recorded public-relay connection warnings separately; application and WebGPU errors were zero. The full warnings are retained in its receipt. Couch guest join/leave also passed.</p></div><aside class="next-pass"><p class="note-label">Where the next art pass should go</p><ol><li><h4>Depth-aware labels</h4><p>Names can still show through props. The separate WebGPU text layer needs scene-depth occlusion.</p></li><li><h4>More distinct creature bodies</h4><p>Flyer and biped silhouettes are too close, especially when a hat hides the propeller.</p></li><li><h4>More personality in plain fish</h4><p>Koi, Guppy and Puffer stand out. Chub and Bloop still need stronger individual character.</p></li><li><h4>The tiny joins</h4><p>Small SDF irregularities remain visible at close inspection. Some secondary foliage is still clumpy.</p></li></ol></aside></div>
+      <p id="receipt-status" class="receipt-status">Recorded on 30 September 2026. Loading the captured evidence…</p>
+    </div></section>
+  </main>
+  <footer class="wrap footer"><a class="brand" href="#main"><img src="favicon.svg" width="30" height="30" alt="Campfire flame"><span>campfire<span class="brand-dot">.</span></span></a><p>A little room in the woods. A little better than before.</p><a href="docs/model-review.md" download>Full written review (.md) ↗</a></footer>
+  <noscript><p class="wrap">The screenshots and written review work without JavaScript. Enable it for model selection, the comparison divider and hat families.</p></noscript>
+</body>
+</html>

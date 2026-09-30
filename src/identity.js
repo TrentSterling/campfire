@@ -28,14 +28,15 @@ export async function getOrCreateIdentity() {
     const raw = localStorage.getItem(KEY)
     if (raw) {
       const d = JSON.parse(raw)
-      if (d && Number.isFinite(d.seed) && typeof d.name === 'string' && d.name) persisted = { seed: d.seed, name: d.name }
+      if (d && Number.isFinite(d.seed) && typeof d.name === 'string' && d.name)
+        persisted = { seed: d.seed, name: d.name, hat: Number.isFinite(d.hat) ? d.hat : -1 }
     }
   } catch {} // corrupt/inaccessible storage: fall through to a fresh identity
   if (!persisted) {
     const seed = (Math.random() * 1e9) | 0
     const name = randomName()
     saveIdentity(seed, name)
-    persisted = { seed, name }
+    persisted = { seed, name, hat: -1 }
   }
 
   try {
@@ -48,17 +49,17 @@ export async function getOrCreateIdentity() {
       })
       // lock lost: some other already-open tab of this same profile owns the
       // persisted identity, so mint an ephemeral one for this extra tab only
-      if (!gotLock) return { seed: (Math.random() * 1e9) | 0, name: randomName() }
+      if (!gotLock) return { seed: (Math.random() * 1e9) | 0, name: randomName(), hat: -1 }
     }
   } catch {} // Web Locks unsupported: every tab falls back to the persisted identity
 
   return persisted
 }
 
-// persists {seed, name} to localStorage; silently no-ops if storage is unavailable
-// (private browsing, quota, etc.) since identity is a nice-to-have, never required.
-export function saveIdentity(seed, name) {
-  try { localStorage.setItem(KEY, JSON.stringify({ seed, name: String(name).slice(0, 24) })) } catch {}
+// persists {seed, name, hat} to localStorage; silently no-ops if storage is
+// unavailable (private browsing, quota, etc.) since identity is a nice-to-have.
+export function saveIdentity(seed, name, hat = -1) {
+  try { localStorage.setItem(KEY, JSON.stringify({ seed, name: String(name).slice(0, 24), hat: Number.isFinite(+hat) ? Math.trunc(+hat) : -1 })) } catch {}
 }
 
 function escHtml(s) { return String(s).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m])) }
@@ -97,6 +98,7 @@ export function initIdentityUI(getCurrentName, onRename) {
 
   const input = document.createElement('input')
   input.id = 'identity-input'
+  input.setAttribute('aria-label', 'Your critter name')
   input.maxLength = 24
   input.autocomplete = 'off'
   input.spellcheck = false
@@ -117,7 +119,9 @@ export function initIdentityUI(getCurrentName, onRename) {
 
   tag.addEventListener('click', openEditor)
   input.addEventListener('keydown', e => {
+    e.stopPropagation()
     if (e.key === 'Enter') {
+      e.preventDefault()
       const v = input.value.trim()
       if (v) onRename(v)
       closeEditor()

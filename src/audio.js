@@ -9,10 +9,25 @@
 // at boot.
 import * as THREE from 'three'
 import { scene, softCircleTexture } from './world/scene.js'
+import { getSettings } from './preferences.js'
 
 let ctx = null
 let master = null
+let ambienceBus=null, effectsBus=null
 let bedStarted = false
+let ambienceMuted = false
+
+export function setAmbienceMuted(muted) {
+  ambienceMuted = !!muted
+  applyAudioSettings()
+}
+export function applyAudioSettings() {
+  if(!ctx)return
+  const s=getSettings()
+  ambienceBus?.gain.setTargetAtTime(ambienceMuted?0:s.ambience,ctx.currentTime,.03)
+  effectsBus?.gain.setTargetAtTime(s.effects,ctx.currentTime,.03)
+}
+export const audioMixSnapshot=()=>({ambience:ambienceBus?.gain.value,effects:effectsBus?.gain.value,muted:ambienceMuted})
 
 // ---------------------------------------------------------------------------
 // context lifecycle
@@ -26,6 +41,8 @@ export function initAudio() {
     master = ctx.createGain()
     master.gain.value = 0.6
     master.connect(ctx.destination)
+    ambienceBus=ctx.createGain();effectsBus=ctx.createGain()
+    ambienceBus.connect(master);effectsBus.connect(master);applyAudioSettings()
     const resume = () => { if (ctx && ctx.state !== 'running') ctx.resume().catch(() => {}) }
     addEventListener('pointerdown', resume, { passive: true, once: true })
     addEventListener('keydown', resume, { once: true })
@@ -54,7 +71,7 @@ function startAmbienceBed() {
     const crackleFilt = ctx.createBiquadFilter()
     crackleFilt.type = 'bandpass'; crackleFilt.frequency.value = 1200; crackleFilt.Q.value = 0.6
     const crackleGain = ctx.createGain(); crackleGain.gain.value = 0.04
-    crackle.connect(crackleFilt).connect(crackleGain).connect(master)
+    crackle.connect(crackleFilt).connect(crackleGain).connect(ambienceBus)
     crackle.start()
     const flicker = () => {
       if (!ctx) return
@@ -68,7 +85,7 @@ function startAmbienceBed() {
     const nightFilt = ctx.createBiquadFilter()
     nightFilt.type = 'lowpass'; nightFilt.frequency.value = 380
     const nightGain = ctx.createGain(); nightGain.gain.value = 0.03
-    night.connect(nightFilt).connect(nightGain).connect(master)
+    night.connect(nightFilt).connect(nightGain).connect(ambienceBus)
     night.start()
   } catch (e) { console.warn('audio: ambience bed failed', e) }
 }
@@ -84,7 +101,7 @@ function blip(f0, f1, dur, type, gainV) {
   const g = ctx.createGain()
   g.gain.setValueAtTime(gainV, t0)
   g.gain.exponentialRampToValueAtTime(0.0008, t0 + dur)
-  osc.connect(g).connect(master)
+  osc.connect(g).connect(effectsBus)
   osc.start(t0); osc.stop(t0 + dur + 0.02)
 }
 
@@ -96,7 +113,7 @@ function thump(dur, gainV) {
   const g = ctx.createGain()
   g.gain.setValueAtTime(gainV, t0)
   g.gain.exponentialRampToValueAtTime(0.0008, t0 + dur)
-  osc.connect(g).connect(master)
+  osc.connect(g).connect(effectsBus)
   osc.start(t0); osc.stop(t0 + dur + 0.02)
 }
 

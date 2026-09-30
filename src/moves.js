@@ -13,6 +13,10 @@ import { net } from './net/net.js'
 import { critterMakeArch } from './critter/critter.js'
 import { makeTag, placeSprites, randomName } from './critter/tags.js'
 import { playChirp, spawnDust } from './audio.js'
+import { nearRack, setRiding, placeGear } from './critter/gear.js'
+import { doFish } from './fishing.js'
+import { ollieBonus, petBonus } from './progress.js'
+import { openHatShop } from './hat-shop.js'
 
 const PET_RANGE = 3.2
 
@@ -38,6 +42,7 @@ function peerIdOf(critter) {
 export function doJump() {
   const me = state.me; if (!me) return
   me.wantJump = true
+  if (me.riding) { me.boardSpin = 0.55; ollieBonus() } // ollie kickflip (+1 shell, cooldown)
   playChirp('hop')
   spawnDust(me.pos.x, GY, me.pos.z, 6, 0.22, 0.07, 0.5)
   if (net.sendAct) net.sendAct({ t: 'hop' })
@@ -45,10 +50,18 @@ export function doJump() {
 
 export function doPet() {
   const me = state.me; if (!me) return
+  if (nearRack(me)) { openHatShop(); return }
   const c = nearestPettable(); if (!c) return
   c.petBy(me)
   me.squashVel -= 0.8 // little petting bob on the petter too
+  petBonus()          // +1 shell for the kindness (30s cooldown)
   if (net.sendAct) net.sendAct({ t: 'pet', target: peerIdOf(c) })
+}
+
+export function doRide() {
+  const me = state.me; if (!me) return
+  setRiding(me, !me.riding)
+  playChirp(me.riding ? 'hop' : 'land')
 }
 
 export function doWave() {
@@ -64,6 +77,7 @@ export function onPeerAct(d, peerId) {
   const c = p.critter
   if (d.t === 'hop') {
     c.wantJump = true
+    if (c.riding) c.boardSpin = 0.55 // remote ollies flip too
     playChirp('hop')
     spawnDust(c.pos.x, GY, c.pos.z, 6, 0.22, 0.07, 0.5)
   }
@@ -80,12 +94,15 @@ export function onPeerAct(d, peerId) {
 // ---------------------------------------------------------------------------
 // keyboard: Space = jump/hop, E = pet, Q = wave (chat input stays untouched)
 // ---------------------------------------------------------------------------
-const typing = () => document.activeElement && document.activeElement.tagName === 'INPUT'
+const typing = () => /INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName || '')
 addEventListener('keydown', e => {
+  if (document.activeElement?.tagName === 'BUTTON' && (e.code === 'Space' || e.key === 'Enter')) return
   if (typing() || e.repeat) return
   if (e.code === 'Space') { e.preventDefault(); doJump() }
   else if (e.code === 'KeyE') doPet()
   else if (e.code === 'KeyQ') doWave()
+  else if (e.code === 'KeyR') doRide()
+  else if (e.code === 'KeyF') doFish()
 })
 
 // ---------------------------------------------------------------------------
@@ -99,11 +116,14 @@ const fwd = new THREE.Vector3(), right = new THREE.Vector3(), UP = new THREE.Vec
 export function updateMoves(dt) {
   // debug critters (window.__spawnArch) live outside npcs[] so manageNPCs
   // never retires them; they are updated here instead of in main.js
-  for (const c of debugCritters) { c.update(dt); placeSprites(c) }
+  for (const c of debugCritters) { c.update(dt); placeSprites(c); placeGear(c, dt) }
   const me = state.me; if (!me) return
+  // P1 drives the first connected pad that coop hasn't assigned to a guest;
+  // state.p1Pad tells coop.js which pad to leave alone (join scan skips it)
   const pads = navigator.getGamepads ? navigator.getGamepads() : []
   let gp = null
-  for (const p of pads) if (p && p.connected) { gp = p; break }
+  for (const p of pads) if (p && p.connected && !(state.guestPads && state.guestPads.has(p.index))) { gp = p; break }
+  state.p1Pad = gp ? gp.index : -1
   if (!gp) { if (prevButtons.length) prevButtons = []; return }
 
   // left stick -> camera-relative run direction (radial deadzone, OG values)
@@ -120,12 +140,14 @@ export function updateMoves(dt) {
     if (me.arch !== 'hopper') me.target = null // hoppers steer by their own hop targets
   }
 
-  // buttons (edge-triggered): A = jump/hop, B = pet, X = wave
+  // buttons (edge-triggered): A = jump/hop, B = pet, X = wave, Y = skateboard
   const btn = i => !!(gp.buttons[i] && gp.buttons[i].pressed)
   const edge = i => btn(i) && !prevButtons[i]
   if (edge(0)) doJump()
   if (edge(1)) doPet()
   if (edge(2)) doWave()
+  if (edge(3)) doRide()
+  if (edge(5)) doFish()   // RB casts/reels
   for (let i = 0; i < gp.buttons.length; i++) prevButtons[i] = btn(i)
 }
 

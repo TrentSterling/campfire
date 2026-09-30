@@ -143,8 +143,10 @@ export function initTouchControls({ onMove, onHop, onPet, onWave } = {}) {
   // --- hop / pet / wave buttons ----------------------------------------
   const btns = document.createElement('div')
   btns.className = 'cf-touch-btns'
-  const mk = (glyph, cb) => {
-    const b = document.createElement('div')
+  const mk = (glyph, label, cb) => {
+    const b = document.createElement('button')
+    b.type = 'button'
+    b.setAttribute('aria-label', label)
     b.className = 'cf-touch-btn'
     b.textContent = glyph
     let downId = null
@@ -154,6 +156,7 @@ export function initTouchControls({ onMove, onHop, onPet, onWave } = {}) {
       b.classList.add('active')
       if (typeof cb === 'function') cb()
     })
+    b.addEventListener('click', e => { if (e.detail === 0 && typeof cb === 'function') cb() })
     const clear = e => { if (downId !== null && e.pointerId === downId) downId = null; e.stopPropagation(); b.classList.remove('active') }
     b.addEventListener('pointerup', clear)
     b.addEventListener('pointercancel', clear)
@@ -161,9 +164,9 @@ export function initTouchControls({ onMove, onHop, onPet, onWave } = {}) {
     btns.appendChild(b)
     return b
   }
-  mk('\u{1F44B}', onWave) // wave (top)
-  mk('❤️', onPet) // pet (middle)
-  mk('\u{1F43E}', onHop) // hop (bottom, closest to thumb)
+  mk('\u{1F44B}', 'Wave', onWave)
+  mk('❤️', 'Pet', onPet)
+  mk('\u{1F43E}', 'Hop', onHop)
   document.body.appendChild(btns)
 }
 

@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "browser": "157.0",
+  "gpu": {
+    "backend": "webgpu",
+    "glyphsDrawn": 310,
+    "panelsDrawn": 0,
+    "atlasGlyphs": 160,
+    "atlasBytes": 4194304,
+    "drawCalls": 1,
+    "adapter": "WebGPU adapter",
+    "mode": "instanced-sdf",
+    "uiGlyphs": 281,
+    "labels": [],
+    "font": "Nunito",
+    "canvasTexturesForText": 0
+  },
+  "pixels": {
+    "backend": "webgpu",
+    "titlePixels": 3004,
+    "antialiasPixels": 9596,
+    "total": 11992
+  },
+  "errors": [],
+  "relayWarnings": [
+    "Firefox can’t establish a connection to the server at wss://nostr.vulpem.com/.",
+    "Firefox can’t establish a connection to the server at wss://relay.agorist.space/.",
+    "Firefox can’t establish a connection to the server at wss://nostr.vulpem.com/.",
+    "Firefox can’t establish a connection to the server at wss://relay.agorist.space/.",
+    "Firefox can’t establish a connection to the server at wss://nostr.vulpem.com/.",
+    "Firefox can’t establish a connection to the server at wss://relay.agorist.space/.",
+    "Firefox can’t establish a connection to the server at wss://nostr.vulpem.com/."
+  ]
+}

@@ -29,11 +29,12 @@ export function sdRC_JS(px, py, pz, ax, ay, az, bx, by, bz, r1, r2) {
 
 // smin union of the LIVE per-frame prims, skipping colorOnly decals; mirrors the
 // VSH fieldDist so eyes can be projected onto the union surface every frame
-export function fieldDistJS(c, x, y, z) {
+export function fieldDistJS(c, x, y, z, skip = null) {
   const fA = c.fA, fB = c.fB, fC = c.fC, prims = c.prims
   let d = 1e9
   for (let i = 0; i < prims.length; i++) {
     if (prims[i].colorOnly) continue
+    if (skip?.has(i)) continue
     const o = i * 4
     const di = sdRC_JS(x, y, z, fA[o], fA[o + 1], fA[o + 2], fB[o], fB[o + 1], fB[o + 2], fA[o + 3], fB[o + 3])
     const k = Math.max(fC[o + 3], 1e-4)

@@ -26,7 +26,7 @@ export function makeShell(prims, outlineHex) {
   const uni = { uPrimA: { value: fA }, uPrimB: { value: fB }, uPrimC: { value: fC }, uPrimD: { value: fD }, uCount: { value: n }, uCurve: { value: CURVE }, uRim: { value: 0 }, ...sharedCritterUniforms }
   g.add(
     new THREE.Mesh(geo, new THREE.ShaderMaterial({ defines: { PRIM_COUNT: CRIT_MAXP }, vertexShader: CRIT_VSH_LOCAL, fragmentShader: CRIT_FSH_BODY, uniforms: { ...uni, uIso: { value: 0 } } })),
-    new THREE.Mesh(geo, new THREE.ShaderMaterial({ defines: { PRIM_COUNT: CRIT_MAXP }, vertexShader: CRIT_VSH_LOCAL, fragmentShader: CRIT_FSH_OUTLINE, uniforms: { ...uni, uIso: { value: 0.02 }, uOutlineTint: { value: new THREE.Color(outlineHex) } }, side: THREE.BackSide }))
+    new THREE.Mesh(geo, new THREE.ShaderMaterial({ defines: { PRIM_COUNT: CRIT_MAXP }, vertexShader: CRIT_VSH_LOCAL, fragmentShader: CRIT_FSH_OUTLINE, uniforms: { ...uni, uIso: { value: 0.012 }, uOutlineTint: { value: new THREE.Color(outlineHex) } }, side: THREE.BackSide }))
   )
   return { group: g, fA, fB, fC, fD, geo, count: n }
 }

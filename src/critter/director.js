@@ -18,8 +18,10 @@
 // a vignette's target -- so claiming a critter here (setting c.vignette) safely suspends its
 // normal wander AI for the duration.
 import { critters } from '../state.js'
-import { rr, TAU } from '../engine/rng.js'
+import { rr, TAU, angleLerp } from '../engine/rng.js'
 import { FIRE_R } from '../world/scene.js'
+import { SEATS } from '../world/scatter.js'
+import { nearestWalkable } from '../world/obstacles.js'
 
 const director = { active: [], cool: new Map(), clock: 0 }
 
@@ -96,6 +98,66 @@ const VIGNETTES = [
     end(v) { for (const c of v.cast) { try { c.napping = false } catch (e) {} } },
   },
 
+  // 2.5) sit: an idle NPC ambles to a free bench/stump seat and watches the
+  // fire for a while. Uses the furniture (SEATS anchors from scatter.js) so the
+  // benches read as seats, not decoration. Heading is steered directly toward
+  // the firepit each tick (gazeAt only accepts live critters, so the same
+  // angleLerp face-the-fire trick wander() uses is borrowed here).
+  {
+    name: 'sit', min: 1, cd: 9, weight: 0.9,
+    find() {
+      if (!SEATS.length) return null
+      const p = idleNpcs(c => true)
+      if (!p.length) return null
+      // pick the idle NPC closest to any seat not already occupied by a critter
+      let best = null
+      for (const c of p) {
+        for (const s of SEATS) {
+          let taken = false
+          for (const o of critters) {
+            if (o !== c && (o.pos.x - s.x) ** 2 + (o.pos.z - s.z) ** 2 < 0.6) { taken = true; break }
+          }
+          if (taken) continue
+          const d = (c.pos.x - s.x) ** 2 + (c.pos.z - s.z) ** 2
+          if (!best || d < best.d) best = { c, s, d }
+        }
+      }
+      if (!best) return null
+      best.c.__seat = best.s
+      return [best.c]
+    },
+    start(v) {
+      v.dur = rr(7, 13)
+      const c = v.cast[0], s = c.__seat
+      const d=Math.hypot(s.x,s.z),r=Math.min(.36,Math.max(.18,c.bodyR*.55))
+      v.approach=nearestWalkable({x:s.x-s.x/d*.85,z:s.z-s.z/d*.85},r)
+      c.seated=false;c.__route=null;c.target=v.approach
+    },
+    tick(v, dt) {
+      v.t = (v.t || 0) + dt
+      const c = v.cast[0]
+      try {
+        if (!c.seated && !c.target && !c.__route?.length && c.speedN < 0.1 && c.__seat && Math.hypot(c.pos.x-v.approach.x,c.pos.z-v.approach.z)<.45) {
+          c.pos.set(c.__seat.x,0,c.__seat.z);c.vel.set(0,0,0);c.seated=true
+          v.rest=0
+        }
+        if (c.seated) {
+          v.rest=(v.rest||0)+dt
+          const fa = Math.atan2(-c.pos.x, -c.pos.z)   // face the firepit (origin)
+          c.heading = angleLerp(c.heading, fa, Math.min(1, 2.5 * dt))
+        }
+      } catch (e) {}
+      return v.rest>=v.dur || v.t>v.dur+12
+    },
+    end(v) {
+      const c=v.cast[0],r=Math.min(.36,Math.max(.18,c.bodyR*.55))
+      c.seated=false;c.__seat=null;c.__route=null;c.target=null;c.wanderTimer=.1
+      const exit=nearestWalkable(v.approach || c.pos,r)
+      if(exit)c.pos.set(exit.x,0,exit.z)
+      if(c.legs)for(const leg of c.legs){leg.initd=false;leg.wasAirborne=true}
+    },
+  },
+
   // 3) tag: one idle NPC's target briefly becomes another's live position (a little chase).
   // Both sides move (the "it" chases, the other juke-flees every ~1s) so this
   // is the vignette that reads as the most motion -- kept frequent/high weight.
@@ -134,6 +196,24 @@ const VIGNETTES = [
   },
 ]
 
+export function releaseCompanion(c) {
+  for(let i=director.active.length-1;i>=0;i--) {
+    const v=director.active[i]
+    if(!v.cast.includes(c))continue
+    if(v.row.end)v.row.end({...v,cast:[c]})
+    v.cast=v.cast.filter(actor=>actor!==c)
+    if(v.cast.length<v.row.min)director.active.splice(i,1)
+  }
+  c.vignette=null;c.seated=false;c.__seat=null;c.__route=null;c.target=null;c.wanderTimer=.1
+}
+export function requestCompanionSeat(c,seat) {
+  if(!c?.wanderEnabled||c.controlled||!seat)return false
+  releaseCompanion(c)
+  const row=VIGNETTES.find(row=>row.name==='sit'),v={row,cast:[c],t:0}
+  c.__seat=seat;c.vignette='sit';row.start(v);director.active.push(v)
+  return true
+}
+
 // called once per frame (see main.js wiring note at bottom of this file's report).
 // Cheap: short-circuits to a no-op scan when nothing is eligible, defensive throughout
 // so one bad critter field can never take down the render loop.
@@ -150,7 +230,9 @@ export function tickDirector(dt) {
       // left permanently claimed (stuck refusing to wander) if this ever fires
       // on a still-live critter in the future.
       if (v.cast.length !== before.length) {
-        for (const c of before) if (c && !v.cast.includes(c)) { try { c.vignette = null } catch (e) {} }
+        for (const c of before) if (c && !v.cast.includes(c)) {
+          try { if(v.row.end)v.row.end({...v,cast:[c]});c.vignette = null;c.seated=false;c.__seat=null;c.__route=null } catch (e) {}
+        }
       }
       const done = v.cast.length < v.row.min || v.row.tick(v, dt)
       if (done) {
