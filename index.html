@@ -21,6 +21,14 @@
 <meta name="twitter:image" content="https://tront.xyz/campfire/og-image.png?v=20261001" />
 <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
 <link rel="stylesheet" href="./src/ui.css" />
+<script>
+// Tront Party hook: ?party=CODE puts this game in the crew's room (no code to type), and loads
+// the party overlay (roster pill + back-to-party) from the party page this tab came from.
+(function(){var q=new URLSearchParams(location.search),c=(q.get('party')||'').toUpperCase().replace(/[^A-Z0-9]/g,'');if(!/^[A-Z0-9]{5}$/.test(c))return;
+window.TRONT_PARTY={code:c,name:(q.get('name')||'').replace(/[<>]/g,'').slice(0,20)};
+var h;try{h=new URL(q.get('ret')||'../party/',location.href);if(!/^https?:$/.test(h.protocol)||(h.origin!==location.origin&&['tront.xyz','www.tront.xyz','trentsterling.github.io'].indexOf(h.hostname)<0)||!/\/party\/(index\.html)?$/.test(h.pathname))throw 0}catch(e){h=new URL('../party/',location.href)}
+var s=document.createElement('script');s.src=new URL('tront-party.js',h).href;s.onload=function(){window.TRONT_PARTY.party=TrontParty.attachGame({gameId:'campfire'})};document.head.appendChild(s)})();
+</script>
 </head>
 <body>
 <main id="app" aria-label="Campfire island. Use WASD to walk and drag to look around."></main>
