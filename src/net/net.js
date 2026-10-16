@@ -40,7 +40,8 @@ function handlePeerMsg(d, peerId) {
 export async function connect({ onChat, onAct }) {
   try {
     const { joinRoom, selfId } = await import('trystero')
-    const room = new URLSearchParams(location.search).get('room') || 'main'
+    // Tront Party: ?party=CODE (read by the hook in index.html) picks the crew's room
+    const room = (window.TRONT_PARTY && 'party-' + window.TRONT_PARTY.code) || new URLSearchParams(location.search).get('room') || 'main'
     const roomHandle = joinRoom({ appId: 'tront-campfire' }, room)
     net.room = roomHandle
     setStatus('The fire is warm. Room for a friend.', true)
